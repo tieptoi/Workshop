@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 091830a62694ec6eaabe4069e722933c9245c0d4
 'use strict';
 
 var express = require('express'),
