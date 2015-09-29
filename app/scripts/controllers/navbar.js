@@ -32,7 +32,8 @@ angular.module('todoApp')
         };
 
         /* Add item to cart by listening on add2Cart event */
-        $scope.$on('add2Cart', function (event, item, form) {
+        $scope.$onRootScope('add2Cart', function (event, item, form) {
+            console.log('reciever');
             if (form.$valid) {
                 //Check duplicate item in cart
                 //console.log(form.$valid);

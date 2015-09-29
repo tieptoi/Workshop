@@ -1,15 +1,11 @@
 'use strict';
 
 angular.module('todoApp')
-    .controller('ItemCtrl', function ($scope, $cookies, $log, ItemService) {
+    .controller('ItemCtrl', function ($scope, $log, ItemService) {
         /// Properties===============
         $scope.items = [];
         $scope.item = {};
         $scope.master = {};
-        $scope.cart = {
-            items: [],
-            total: 0
-        };
 
         /// Init=====================
         function init() {
@@ -34,8 +30,7 @@ angular.module('todoApp')
 
         /*  Add item to cart */
         $scope.add = function (item, form) {
-            $scope.$broadcast('add2Cart', item, form);
-
+            $scope.$emit('add2Cart', item, form);
         };
 
     });
