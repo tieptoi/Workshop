@@ -1,74 +1,72 @@
 <div ng-include="'partials/navbar'"></div>
 <div class="row">
-		<h1> Items </h1>
-		 <div class="col-md-3" ng-repeat="item in items">
-            <div class="product-block">
-                <div class="image">
-                    <img src="images/{{item.image}}" title="{{item.name}}" alt="{{item.name}}">
+    <h3><strong>Products</strong></h3>
+    <hr>
+    <div class="col-md-3" ng-repeat="item in items">
+        <div class="product-block" ng-click="viewDetail(item)" data-toggle="modal" data-target="#modal">
+            <div class="image">
+                <img src="images/{{item.image}}" title="{{item.name}}" alt="{{item.name}}">
+            </div>
+            <div class="product-meta">
+                <h2 class="name">{{item.name}}</h2>
+                <div class="price">
+                    <span class="price-new">{{item.price}}€</span>
                 </div>
-                <div class="product-meta">
-                    <h2 class="name">{{item.name}}</h2>
-                    <div class="price">
-                        <span class="price-new">{{item.price}}€</span>
-                    </div>
-                    <div class="cart">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal"  ng-click="viewDetail(item)">View Detail</button>
-                    </div>
+                <div class="cart">
+                    <button class="btn btn-primary btn-sm">View Detail</button>
                 </div>
-         	</div>
-		</div>
-</div>
-<div class="row">
-<div id="modal" class="modal fade" ng-model="item" ng-init="item.orderQuantity = 1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" data-target="#modal" aria-hidden="true">&times;</button>
-          <h3 class="modal-title"><strong>Detail</strong></h3>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="images/{{item.image}}" alt="Product" class="img-thumbnail">
-                </div>
-                <div class="col-md-8">
-                    <h2><strong class="modalName">{{item.name}}</strong></h2>
-                    <hr>
-                    <h4><strong>Price: </strong><span class="label label-success">{{item.price}}</span></h4>
-                    <br>
-                    <p>{{item.description}}</p>
-                    <p class="text-danger modalQuantity">Only {{item.quantity}} left in stock</p>
-                    <div class="form-inline">
-                        <h4><strong>Quantity: </strong></h4>
-                        <ng-form name="quantityForm">
-                            <div class="form-group " ng-class="{ 'has-error' : quantityForm.quantity.$invalid && !quantityForm.quantity.$pristine }">
-                            <input type="number" class="form-control" name="quantity" ng-model="item.orderQuantity" min="1" max="{{item.quantity}}" required>
-                            <span class="help-block" ng-show="quantityForm.quantity.$error.min">Quantity must be more than 1</span>
-                            <span class="help-block" ng-show="quantityForm.quantity.$error.max">Quantity must be less than available quantity</span>
-                            <span class="help-block" ng-show="quantityForm.quantity.$error.required">Quantity Field is invalid</span>
-                            </div>
-                        </ng-form>
-                    </div>
-                    <br>
-
-                    <button type="button" class="btn btn-info btn-md" ng-click="add(item,quantityForm)"  data-target="#modal"  data-dismiss="modal">
-                        <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
-                        <strong>Add to Cart</strong>
-                    </button>
-                    <button type="button" class="btn btn-default btn-md button-container">
-                        <span id="iconname" class="glyphicon glyphicon-plus"></span>&nbsp;
-                        <strong id="buttonname">Subscribe</strong>
-                           </button>  
-                </div> 
             </div>
         </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-      </div>
     </div>
-</div>   
 </div>
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
+<div class="row">
+    <div id="modal" class="modal fade" ng-model="item" ng-init="item.orderQuantity = 1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" data-target="#modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title"><strong>Detail</strong></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="images/{{item.image}}" alt="Product" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-8">
+                            <h2><strong class="modalName">{{item.name}}</strong></h2>
+                            <hr>
+                            <h4><strong>Price: </strong><span class="label label-success">{{item.price}}</span></h4>
+                            <br>
+                            <p>{{item.description}}</p>
+                            <p class="text-danger modalQuantity">Only {{item.quantity}} left in stock</p>
+                            <div class="form-inline">
+                                <h4><strong>Quantity: </strong></h4>
+                                <ng-form name="quantityForm">
+                                    <div class="form-group " ng-class="{ 'has-error' : quantityForm.quantity.$invalid && !quantityForm.quantity.$pristine }">
+                                        <input type="number" class="form-control" name="quantity" ng-model="item.orderQuantity" min="1" max="{{item.quantity}}" required>
+                                        <span class="help-block" ng-show="quantityForm.quantity.$error.min">Quantity must be more than 1</span>
+                                        <span class="help-block" ng-show="quantityForm.quantity.$error.max">Quantity must be less than available quantity</span>
+                                        <span class="help-block" ng-show="quantityForm.quantity.$error.required">Quantity Field is invalid</span>
+                                    </div>
+                                </ng-form>
+                            </div>
+                            <br>
+
+                            <button type="button" class="btn btn-info btn-md" ng-click="add(item,quantityForm)" data-target="#modal" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
+                                <strong>Add to Cart</strong>
+                            </button>
+                            <button type="button" class="btn btn-default btn-md button-container">
+                                <span id="iconname" class="glyphicon glyphicon-plus"></span>&nbsp;
+                                <strong id="buttonname">Subscribe</strong>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
