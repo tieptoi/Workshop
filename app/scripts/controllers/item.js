@@ -1,26 +1,23 @@
 'use strict';
 
-angular.module('todoApp')
-    .controller('ItemCtrl', function ($scope, $log, ItemService) {
+angular.module('ItemCtrl', ['itemService'])
+    .controller('ItemController', function ($scope, Item) {
         /// Properties===============
-        $scope.items = [];
-        $scope.item = {};
-        $scope.master = {};
+        //        $scope.items = [];
+        //        $scope.item = {};
+        //        $scope.master = {};
 
         /// Init=====================
-        function init() {
-            ItemService.getItems()
-                .success(function (response) {
-                    $scope.items = response;
-                    angular.forEach($scope.items, function (item) {
-                        item.orderQuantity = 1;
-                    });
-                }).error(function (response) {
-                    console.log(response);
+        Item.getItems()
+            .success(function (response) {
+                $scope.items = response;
+                angular.forEach($scope.items, function (item) {
+                    item.orderQuantity = 1;
                 });
-        }
+            }).error(function (response) {
+                console.log(response);
+            });
 
-        init();
 
         /* View Item Detail in Modal*/
         $scope.viewDetail = function (item) {

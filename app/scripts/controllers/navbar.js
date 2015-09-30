@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('todoApp')
-    .controller('NavbarCtrl', function ($scope, $cookies, $location) {
-        //Properties
+angular.module('NavbarCtrl', ['ngCookies'])
+    .controller('NavbarController', function ($scope, $cookies, $location) {
+        //Define Properties
         $scope.cart = {
             items: [],
             total: 0
@@ -33,7 +33,6 @@ angular.module('todoApp')
 
         /* Add item to cart by listening on add2Cart event */
         $scope.$onRootScope('add2Cart', function (event, item, form) {
-            console.log('reciever');
             if (form.$valid) {
                 //Check duplicate item in cart
                 //console.log(form.$valid);

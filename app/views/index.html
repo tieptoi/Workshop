@@ -33,6 +33,7 @@
     <!-- Add your site or application content here -->
     <div ng-include="'partials/navbar'"></div>
     <div class="container" ng-view=""></div>
+    <div ng-include="'partials/footer'"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--
@@ -72,12 +73,19 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
+    <!-- controllers -->
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/item.js"></script>
     <script src="scripts/controllers/navbar.js"></script>
+
+    <!-- services -->
     <script src="scripts/services/service.js"></script>
     <script src="scripts/services/itemservice.js"></script>
+
+    <!-- main Angular app files -->
+    <script src="scripts/app.routes.js"></script>
+    <script src="scripts/app.js"></script>
+
     <!-- endbuild -->
 </body>
 
