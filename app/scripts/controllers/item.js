@@ -3,6 +3,7 @@
 angular.module('ItemCtrl', ['itemService'])
     .controller('ItemController', function ($scope, Item) {
         /// Properties===============
+        $scope.tab = 1;
         //        $scope.items = [];
         //        $scope.item = {};
         //        $scope.master = {};
@@ -17,6 +18,14 @@ angular.module('ItemCtrl', ['itemService'])
             }).error(function (response) {
                 console.log(response);
             });
+
+        $scope.isSelected = function (tab) {
+            return tab === $scope.tab;
+        };
+
+        $scope.selectTab = function (tab) {
+            $scope.tab = tab;
+        };
 
 
         /* View Item Detail in Modal*/

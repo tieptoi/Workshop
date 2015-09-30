@@ -25,12 +25,6 @@ angular.module('NavbarCtrl', ['ngCookies'])
             return route === $location.path();
         };
 
-        /* Check There are any item in cart */
-        $scope.anyItem = function () {
-            var flag = ($scope.cart.items.length > 0) ? true : false;
-            return flag;
-        };
-
         /* Add item to cart by listening on add2Cart event */
         $scope.$onRootScope('add2Cart', function (event, item, form) {
             if (form.$valid) {
