@@ -11,16 +11,16 @@ angular.module('NavbarCtrl', ['ngCookies'])
         $scope.menu = [{
             'title': 'Home',
             'link': '/'
-    }, {
+        }, {
             'title': 'Items',
             'link': '/items'
-    }, {
+        }, {
             'title': 'Contact',
             'link': '/contact'
-    }, {
+        }, {
             'title': 'About',
             'link': '/about'
-    }];
+        }];
         $scope.isActive = function (route) {
             return route === $location.path();
         };
@@ -67,7 +67,7 @@ angular.module('NavbarCtrl', ['ngCookies'])
         /* Remove item in cart */
         $scope.remove = function (item) {
             if (item.orderQuantity > 0) {
-                $scope.cart.total = $scope.cart.total - (item.orderQuantity * item.price)
+                $scope.cart.total = $scope.cart.total - (item.orderQuantity * item.price);
             }
             $scope.cart.items.splice($scope.cart.items.indexOf(item), 1);
             // Setting a cookie
@@ -87,7 +87,7 @@ angular.module('NavbarCtrl', ['ngCookies'])
 
 
         // Retrieving a cookie
-        if ($cookies.getObject('cart') != null) {
+        if ($cookies.getObject('cart') !== null) {
             $scope.cart = $cookies.getObject('cart');
             $scope.changeQuantity();
         }

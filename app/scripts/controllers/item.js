@@ -19,12 +19,12 @@ angular.module('ItemCtrl', ['itemService'])
                 console.log(response);
             });
 
-        $scope.isSelected = function (tab) {
-            return tab === $scope.tab;
+        $scope.isSelected = function (tabName) {
+            return tabName === $scope.tab;
         };
 
-        $scope.selectTab = function (tab) {
-            $scope.tab = tab;
+        $scope.selectTab = function (tabName) {
+            $scope.tab = tabName;
         };
 
 

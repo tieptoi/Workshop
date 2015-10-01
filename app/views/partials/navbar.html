@@ -50,7 +50,7 @@
                                                     </ng-form>
                                                 </td>
                                                 <td class="col-md-1 text-center"><strong>{{item.price}}<strong></td>
-			        <td class="col-md-1 text-center"><strong>{{item.orderQuantity>0 ? item.price * item.orderQuantity:0}}</strong></td>
+                    <td class="col-md-1 text-center"><strong>{{item.orderQuantity>0 ? item.price * item.orderQuantity:0}}</strong></td>
                                                 <td class="col-md-1 text-center">
                                                     <button id="btnRemoveItem" type="button" class="btn btn-danger btn-sm" ng-click='remove(item)'> Remove
                                                         <span class="glyphicon glyphicon-remove"></span>
@@ -86,9 +86,9 @@
                                 </form>
                             </div>
                             <script type="text/javascript">
-                                $('#cartTable').click(function (e) {
-                                    e.stopPropagation();
-                                });
+                            $('#cartTable').click(function(e) {
+                                e.stopPropagation();
+                            });
                             </script>
                         </div>
                 </li>

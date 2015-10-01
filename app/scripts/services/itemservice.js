@@ -10,11 +10,11 @@ angular.module('itemService', [])
 
         //CREATE ==========================
         this.addItem = function (item) {
-            return $http.post('/api/addItem', JSON.stringify(thing));
+            return $http.post('/api/addItem', JSON.stringify(item));
         };
         //Update ==========================
         this.updateItem = function (item) {
-            return $http.post('/api/updateItem', JSON.stringify(thing));
+            return $http.post('/api/updateItem', JSON.stringify(item));
         };
         //Delete ==========================
         //this.getThing = function (id) {
