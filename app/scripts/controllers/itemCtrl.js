@@ -5,9 +5,6 @@ angular.module('ItemCtrl', ['itemService'])
         /// Properties===============
         $scope.tab = 1;
         $scope.sortOrder = 'price-asc';
-        //        $scope.items = [];
-        //        $scope.item = {};
-        //        $scope.master = {};
 
         /// Init=====================
         Item.getItems()
@@ -35,7 +32,14 @@ angular.module('ItemCtrl', ['itemService'])
         /* View Item Detail in Modal*/
         $scope.viewDetail = function (item) {
             $scope.item = item;
-            $scope.master = angular.copy($scope.item);
+            item.views = item.views + 1;
+            console.log(item);
+            Item.updateItem(item).success(function (response) {
+                console.log(response);
+            }).error(function (response) {
+                console.log(response);
+            });
+            //$scope.master = angular.copy($scope.item);
         };
 
         /*  Add item to cart */
