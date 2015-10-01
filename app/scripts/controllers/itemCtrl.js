@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('ItemCtrl', ['itemService'])
-    .controller('ItemController', function ($scope, Item) {
+    .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.tab = 1;
+        $scope.sortOrder = 'price-asc';
         //        $scope.items = [];
         //        $scope.item = {};
         //        $scope.master = {};
@@ -27,6 +28,9 @@ angular.module('ItemCtrl', ['itemService'])
             $scope.tab = tabName;
         };
 
+        $scope.sortChange = function () {
+            $scope.items = $filter('orderBy')($scope.items, $scope.sortOrder.split('-')[0], $scope.sortOrder.split('-')[1] === 'desc' ? true : false);
+        };
 
         /* View Item Detail in Modal*/
         $scope.viewDetail = function (item) {
