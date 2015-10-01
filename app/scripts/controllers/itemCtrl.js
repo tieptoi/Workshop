@@ -4,7 +4,7 @@ angular.module('ItemCtrl', ['itemService'])
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.tab = 1;
-        $scope.sortOrder = 'price-asc';
+        $scope.sortOrder = 'views-desc';
 
         /// Init=====================
         Item.getItems()

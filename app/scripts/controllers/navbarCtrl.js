@@ -15,10 +15,10 @@ angular.module('NavbarCtrl', ['ngCookies'])
             'title': 'Items',
             'link': '/items'
         }, {
-            'title': 'Contact',
+            'title': 'Contact Us',
             'link': '/contact'
         }, {
-            'title': 'About',
+            'title': 'About Us',
             'link': '/about'
         }];
         $scope.isActive = function (route) {
