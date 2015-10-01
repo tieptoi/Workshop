@@ -87,7 +87,7 @@ angular.module('NavbarCtrl', ['ngCookies'])
 
 
         // Retrieving a cookie
-        if ($cookies.getObject('cart') !== null) {
+        if ($cookies.getObject('cart') && $cookies.getObject('cart') !== null) {
             $scope.cart = $cookies.getObject('cart');
             $scope.changeQuantity();
         }

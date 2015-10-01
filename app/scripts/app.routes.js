@@ -4,11 +4,11 @@ angular.module('app.routes', ['ngRoute'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'partials/main',
+                templateUrl: 'partials/mainView',
                 controller: 'MainController'
             })
             .when('/items', {
-                templateUrl: 'partials/items',
+                templateUrl: 'partials/itemsView',
                 controller: 'ItemController'
             })
             .otherwise({
@@ -16,4 +16,4 @@ angular.module('app.routes', ['ngRoute'])
             });
 
         $locationProvider.html5Mode(true);
-    })
+    });

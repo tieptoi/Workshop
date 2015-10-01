@@ -12,7 +12,7 @@
     <base href="/">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width,, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(app) styles/vendor.css -->
     <link rel="stylesheet" href="bower_components\bootstrap\dist\css\bootstrap.min.css">
@@ -29,12 +29,10 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
     <!-- Add your site or application content here -->
-    <div ng-include="'partials/navbar'"></div>
+    <div ng-include="'partials/navbarView'"></div>
     <div class="container" ng-view=""></div>
-    <div ng-include="'partials/footer'"></div>
-
+    <div ng-include="'partials/footerView'"></div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--
 <script>
@@ -54,12 +52,10 @@
     ga('send', 'pageview');
 </script>
 -->
-
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-
     <!-- build:js(app) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -71,21 +67,17 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!-- controllers -->
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/item.js"></script>
-    <script src="scripts/controllers/navbar.js"></script>
-
+    <script src="scripts/controllers/mainCtrl.js"></script>
+    <script src="scripts/controllers/itemCtrl.js"></script>
+    <script src="scripts/controllers/navbarCtrl.js"></script>
     <!-- services -->
-    <script src="scripts/services/service.js"></script>
-    <script src="scripts/services/itemservice.js"></script>
-
+    <script src="scripts/services/thingService.js"></script>
+    <script src="scripts/services/itemService.js"></script>
     <!-- main Angular app files -->
     <script src="scripts/app.routes.js"></script>
     <script src="scripts/app.js"></script>
-
     <!-- endbuild -->
 </body>
 
