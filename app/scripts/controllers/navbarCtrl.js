@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('NavbarCtrl', ['ngCookies'])
+angular.module('navbarCtrl', ['ngCookies'])
     .controller('NavbarController', function ($scope, $cookies, $location) {
         //Define Properties
         $scope.cart = {
@@ -8,7 +8,7 @@ angular.module('NavbarCtrl', ['ngCookies'])
             total: 0
         };
 
-        $scope.menu = [{
+        $scope.menus = [{
             'title': 'Home',
             'link': '/'
         }, {
@@ -21,47 +21,39 @@ angular.module('NavbarCtrl', ['ngCookies'])
             'title': 'About Us',
             'link': '/about'
         }];
+
         $scope.isActive = function (route) {
             return route === $location.path();
         };
 
         /* Add item to cart by listening on add2Cart event */
-        $scope.$onRootScope('add2Cart', function (event, item, form) {
-            if (form.$valid) {
-                //Check duplicate item in cart
-                //console.log(form.$valid);
-                var dup = false;
-                angular.forEach($scope.cart.items, function (i) {
-                    if (i.name === item.name) {
-                        dup = true;
-                        console.log(i.orderQuantity);
-                        i.orderQuantity = i.orderQuantity + item.orderQuantity;
-                    }
-                });
-                if (!dup) {
-                    //$log.info(item);
-                    /*Dont ever use this way to add item to array cause it link item in cart back to [$scope.item] */
-
-                    //$scope.cart.items.push(item);
-
-                    /* Instead use this way */
-                    $scope.cart.items.push({
-                        description: item.description,
-                        image: item.image,
-                        quantity: item.quantity,
-                        name: item.name,
-                        pid: item.pid,
-                        price: item.price,
-                        orderQuantity: item.orderQuantity
-                    });
-
-                    // Setting a cookie
-                    $cookies.putObject('cart', $scope.cart);
+        $scope.$onRootScope('add2Cart', function (event, item) {
+            //Check duplicate item in cart
+            //console.log(form.$valid);
+            var dup = false;
+            angular.forEach($scope.cart.items, function (i) {
+                if (i.name === item.name) {
+                    dup = true;
+                    console.log(i.orderQuantity);
+                    i.orderQuantity = i.orderQuantity + item.orderQuantity;
                 }
-                $scope.changeQuantity();
-            } else {
-                angular.copy($scope.master, $scope.item);
+            });
+            if (!dup) {
+                /* Instead use this way */
+                $scope.cart.items.push({
+                    description: item.description,
+                    image: item.image,
+                    quantity: item.quantity,
+                    name: item.name,
+                    pid: item.pid,
+                    price: item.price,
+                    orderQuantity: item.orderQuantity
+                });
+
+                // Setting a cookie
+                $cookies.putObject('cart', $scope.cart);
             }
+            $scope.changeQuantity();
         });
 
         /* Remove item in cart */

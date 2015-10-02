@@ -1,15 +1,23 @@
 /* Space out content a bit */
 
+
 /*body {
     padding-top: 60px;
     padding-bottom: 20px;
 }*/
 
+
 /*    html {
-*/     /*Size of largest container or bigger */
+*/
+
+
+/*Size of largest container or bigger */
+
+
 /*    min-width: 1080px;
 }
 */
+
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 
@@ -127,7 +135,7 @@
 }
 
 .product-block:hover {
-    border: 1px solid #e7e7e7;
+    border: 1px solid #337AB7;
 }
 
 .product-block:hover .image {
@@ -634,6 +642,11 @@
 .table-scrollable {
     max-height: 400px;
     overflow-x: auto
+}
+
+.center-block {
+    float: none;
+    margin: 0 auto;
 }
 
 

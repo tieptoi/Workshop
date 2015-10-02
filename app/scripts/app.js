@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('todoApp', ['app.routes', 'ItemCtrl', 'MainCtrl', 'NavbarCtrl', 'ngResource', 'thingService', 'itemService'])
+angular.module('todoApp', ['app.routes', 'itemCtrl', 'mainCtrl', 'navbarCtrl', 'thingService', 'itemService'])
     .config(['$provide', function ($provide) {
         $provide.decorator('$rootScope', ['$delegate', function ($delegate) {
             Object.defineProperty($delegate.constructor.prototype, '$onRootScope', {

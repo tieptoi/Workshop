@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('ItemCtrl', ['itemService'])
+angular.module('itemCtrl', ['itemService'])
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.tab = 1;
         $scope.sortOrder = 'views-desc';
-
+        $scope.currentPage = 1;
         /// Init=====================
         Item.getItems()
             .success(function (response) {
@@ -17,34 +17,62 @@ angular.module('ItemCtrl', ['itemService'])
                 console.log(response);
             });
 
-        $scope.isSelected = function (tabName) {
-            return tabName === $scope.tab;
+        /* View Item Detail in Modal*/
+        $scope.viewDetail = function (item) {
+            $scope.$emit('viewItemDetail', item);
+
+            //$scope.master = angular.copy($scope.item);
+        };
+        $scope.getListOfPages = function (noOfItemPerPage) {
+            var noOfPages = Math.round($scope.items.length / noOfItemPerPage);
+            var pages = [];
+            var no = 1;
+            for (no = 1; no < noOfPages; no++) {
+                pages.push(no);
+            }
+            return pages;
+        };
+        /* Check which page is selcted*/
+        $scope.isCurrnetPage = function (pageNo) {
+            return pageNo === $scope.currentPage;
         };
 
-        $scope.selectTab = function (tabName) {
-            $scope.tab = tabName;
+        /* Set Current selected page*/
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
         };
 
+        //Sort List of Items according to user's selection.
         $scope.sortChange = function () {
             $scope.items = $filter('orderBy')($scope.items, $scope.sortOrder.split('-')[0], $scope.sortOrder.split('-')[1] === 'desc' ? true : false);
         };
-
-        /* View Item Detail in Modal*/
-        $scope.viewDetail = function (item) {
-            $scope.item = item;
+    })
+    .controller('ModalItemController', function ($scope, Item) {
+        /* Open Item Detail in Modal*/
+        $scope.$onRootScope('viewItemDetail', function (event, item) {
             item.views = item.views + 1;
-            console.log(item);
             Item.updateItem(item).success(function (response) {
                 console.log(response);
             }).error(function (response) {
                 console.log(response);
             });
-            //$scope.master = angular.copy($scope.item);
-        };
 
+            $scope.item = item;
+        });
+        /* Check which tab is selcted in Item Detail Modal*/
+        $scope.isSelected = function (tabName) {
+            return tabName === $scope.tab;
+        };
+        /* Event hanppend when user select a tab in Item Detail Modal*/
+        $scope.selectTab = function (tabName) {
+            $scope.tab = tabName;
+        };
         /*  Add item to cart */
         $scope.add = function (item, form) {
-            $scope.$emit('add2Cart', item, form);
+            if (form.$valid) {
+                $('#modal').modal('hide');
+                $scope.$emit('add2Cart', item);
+            }
         };
 
     });

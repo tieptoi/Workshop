@@ -34,8 +34,8 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div id="modal" class="modal fade" ng-model="item" ng-init="item.orderQuantity=1">
+<div class="row" ng-controller="ModalItemController as ModalItem">
+    <div id="modal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-primary">
@@ -55,26 +55,17 @@
                                     <div class="form-group" ng-class="{ 'has-error' : quantityForm.quantity.$invalid && !quantityForm.quantity.$pristine }">
                                         <label><strong>Quantity: </strong></label>
                                         <input type="number" class="form-control" name="quantity" ng-model="item.orderQuantity" min="1" max="{{item.quantity}}" required>
-                                        <span class="help-block" ng-show="quantityForm.quantity.$error.min">Quantity must be more than 1</span>
-                                        <span class="help-block" ng-show="quantityForm.quantity.$error.max">Quantity must be less than available quantity</span>
-                                        <span class="help-block" ng-show="quantityForm.quantity.$error.required">Quantity Field is invalid</span>
-                                        <button type="button" class="btn btn-info btn-sm" ng-click="add(item,quantityForm)" data-target="#modal" data-dismiss="modal">
+                                        <button type="button" class="btn btn-info btn-sm" ng-click="add(item,quantityForm)">
                                             <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
                                             <strong>Add to Cart</strong>
                                         </button>
+                                        <span class="help-block" ng-show="quantityForm.quantity.$error.min">Quantity must be more than 1</span>
+                                        <span class="help-block" ng-show="quantityForm.quantity.$error.max">Quantity must be less than available quantity</span>
+                                        <span class="help-block" ng-show="quantityForm.quantity.$error.required">Quantity Field is invalid</span>
                                     </div>
                                 </ng-form>
                             </div>
                             <br/>
-                            <!-- <div class="row">
-
-    <!-- <button type="button" class="btn btn-default btn-sm button-container">
-    <span id="iconname" class="glyphicon glyphicon-plus"></span>&nbsp;
-    <strong id="buttonname">Subscribe</strong>
-</button>
-
-                            </div>
- -->
                             <br/>
                             <div>
                                 <section>
@@ -110,5 +101,17 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2 col-md-offset-5 center-block">
+        <ul class="pagination">
+            <li ng-repeat="page in getListOfPages(4)" ng-class="{active:isCurrnetPage(page)}">
+                <a href ng-click="setPage(page)">{{page}}</a>
+            </li>
+            <!--  <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">>></a></li> -->
+        </ul>
     </div>
 </div>
