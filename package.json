@@ -83,11 +83,11 @@
         "test": "test"
     },
     "keywords": [
-    "mean",
-    "node",
-    "express",
-    "angularjs",
-    "mongodb"
-  ],
+        "mean",
+        "node",
+        "express",
+        "angularjs",
+        "mongodb"
+    ],
     "author": "Gary"
 }
