@@ -105,23 +105,34 @@
 
 /* Responsive: Portrait tablets and up */
 
+
+/*
 @media screen and (min-width: 768px) {
     /* Remove the padding we set earlier */
-    /*    .header,
+
+
+/*    .header,
     .marketing,
     .footer {
         padding-left: 0;
         padding-right: 0;
     }*/
-    /* Space out the masthead */
-    /*    .header {
+
+
+/*Space out the masthead */
+
+
+/*    .header {
         margin-bottom: 30px;
     }*/
-    /* Remove the bottom border on the jumbotron for visual effect */
-    /*    .jumbotron {
+
+
+/* Remove the bottom border on the jumbotron for visual effect */
+
+
+/*    .jumbotron {
         border-bottom: 0;
     }*/
-}
 
 
 /* Item style*/
@@ -130,8 +141,37 @@
     overflow: hidden;
     border: 1px solid transparent;
     padding: 5px;
-    margin-bottom: 5px;
-    box-shadow: 0px 0px 1px #d9d9d9;
+    padding-top: 10px;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+    /*box-shadow: 2px 2px rgba(90, 70, 6, 0.41);*/
+}
+
+.product-block .ribbon {
+    background: #E6B517;
+}
+
+.product-block .ribbon {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    font-size: 16px;
+    overflow: hidden;
+    max-width: 80%;
+    min-width: 20%;
+    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 3px 7px;
+    /*box-shadow: 2px 2px #E6B517;*/
+}
+
+.faq .title,
+.product-media .ribbon,
+button {
+    cursor: pointer;
 }
 
 .product-block:hover {
@@ -268,7 +308,9 @@
 }
 
 .product-block .image {
+    padding-top: 5px;
     display: block;
+    overflow: hidden;
     margin-bottom: 0px;
     position: relative;
     border-bottom: 2px solid #e7e7e7;
@@ -344,6 +386,7 @@
     color: #292929;
     text-decoration: line-through;
     font-size: 14px;
+    opacity: .5;
 }
 
 .product-block .price {
@@ -647,6 +690,47 @@
 .center-block {
     float: none;
     margin: 0 auto;
+}
+
+.itemList {
+    background-color: #F8F8F8;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.itemList-Header {
+    background-color: #E8E8E8;
+    margin-bottom: 15px;
+}
+
+.footer {}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 100px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 100px;
+    background-color: #333333;
+    color: #F8F8F8;
+    padding-top: 30px;
+    padding-bottom: 20px;
 }
 
 

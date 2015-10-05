@@ -23,6 +23,16 @@ angular.module('itemCtrl', ['itemService'])
 
             //$scope.master = angular.copy($scope.item);
         };
+
+        /* Get Price(if item on sale)*/
+        $scope.getPrice = function (item) {
+            if (item.isSale) {
+                return (item.price - (item.price * (item.discountPct / 100)));
+            }
+            return item.price;
+            //$scope.master = angular.copy($scope.item);
+        };
+
         $scope.getListOfPages = function (noOfItemPerPage) {
             var noOfPages = Math.round($scope.items.length / noOfItemPerPage);
             var pages = [];
