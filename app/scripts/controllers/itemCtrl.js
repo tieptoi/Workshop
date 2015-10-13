@@ -4,7 +4,7 @@ angular.module('itemCtrl', ['itemService'])
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.tab = 1;
-        $scope.sortOrder = 'views-desc';
+        $scope.sortOrder = '';
         $scope.currentPage = 1;
         /// Init=====================
         Item.getItems()
@@ -54,7 +54,14 @@ angular.module('itemCtrl', ['itemService'])
 
         //Sort List of Items according to user's selection.
         $scope.sortChange = function () {
-            $scope.items = $filter('orderBy')($scope.items, $scope.sortOrder.split('-')[0], $scope.sortOrder.split('-')[1] === 'desc' ? true : false);
+            if ($scope.sortOrder !== '') {
+                $scope.items = $filter('orderBy')($scope.items, $scope.sortOrder.split('-')[0], $scope.sortOrder.split('-')[1] === 'desc' ? true : false);
+            }
+        };
+        /*  Add item to cart */
+        $scope.add = function (item) {
+            item.orderQuantity = 1;
+            $scope.$emit('add2Cart', item);
         };
     })
     .controller('ModalItemController', function ($scope, Item) {

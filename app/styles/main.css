@@ -1,8 +1,51 @@
 /* Customize container */
 
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 50px;
+}
+
 @media (min-width: 768px) {
     .container {
         max-width: 1050px;
+    }
+}
+
+@media(max-width: 750px) {
+    section#middle .col-md-4 {
+        margin-bottom: 20px
+    }
+    section#middle {
+        margin: 10px 0 00px 0;
+    }
+    .jumbotron {
+        height: 230px !important;
+    }
+    h1 {
+        font-size: 26px !important;
+    }
+    h2 {
+        font-size: 20px !important;
+    }
+    .jumbotron img {
+        height: 40px;
+        width: 40px;
+    }
+    .jumbotron .btn {
+        display: none;
+    }
+    .jumbotron .container .lead {
+        font-size: 0.8em !important;
+    }
+    section#features img {
+        display: none;
+    }
+    section#social {
+        padding-top: 0 !important;
+    }
+    section#social .social-icon {
+        width: 30px !important;
+        height: 30px !important;
     }
 }
 
@@ -10,13 +53,38 @@
 /* Main marketing message and sign up button */
 
 .jumbotron {
+    background-image: url("/images/mac-glasses.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    /*padding: 70px 0px 70px 0px;*/
     text-align: center;
+    height: 450px;
     border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 0;
 }
 
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.jumbotron h1 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.jumbotron .container ul {
+    list-style: none;
+}
+
+.jumbotron .container .lead {
+    font-size: 1.2em;
+    line-height: 1.0em;
+    color: #fff;
+    text-align: left;
 }
 
 
@@ -33,7 +101,7 @@
 .product-block {
     overflow: hidden;
     border: 1px solid transparent;
-    padding: 5px;
+    /*padding: 5px;*/
     padding-top: 10px;
     background-color: #FFFFFF;
     /*margin-bottom: 10px;*/
@@ -428,7 +496,7 @@ button {
     display: block;
 }
 
-.vcenter {
+.v-right {
     display: inline-block;
     float: right;
     margin-top: 20px;
@@ -601,7 +669,7 @@ button {
     color: #fff;
     padding: 5px 0px 6px 0px;
     background-color: #48a548;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     width: 100%;
     border-bottom: 1px solid #419941;
 }
@@ -682,18 +750,21 @@ body {
 }
 
 section#middle {
-    margin: 20px 0 20px 0;
+    margin: 00px 0 20px 0;
 }
 
 section#middle img {
     border: 1px solid #EEEEEE;
     padding: 3px 3px 3px 3px;
-    width: 100%;
+}
+
+section#middle .brand-box {
+    height: 100px;
 }
 
 section#features {
     /*height: 300px;*/
-    padding: 30px 0px 30px 0px;
+    padding: 10px 0px 30px 0px;
     color: #fff;
     background-color: #449D44;
 }
@@ -705,7 +776,6 @@ section#features ul {
 }
 
 section#features h1 {
-    font-weight: bold;
     font-size: 3.0em;
 }
 
@@ -724,16 +794,11 @@ section#features img {
 .product-container {
     padding: 2px 2px 2px 2px;
     margin-bottom: 5px;
-    border: 1px solid #F8F8F8;
-}
-
-div.add2cart {
-    /*background-color: #449D44;*/
-    /*display: hidden;*/
+    border: 1px solid transparent;
 }
 
 div.add2cart span p {
-    color: #F8F8F8;
+    color: #fff;
     text-align: center;
     padding: 4px 2px 4px 2px;
     margin: 0px 2px 0px 2px;
@@ -743,12 +808,10 @@ div.add2cart span p {
     border: 1px solid #449D44;
 }
 
-div.add2cart:hover {
+.product-container:hover div.add2cart {
     background-color: #449D44;
-}
-
-div.add2cart span p:hover {
-    color: #fff;
+    color: #449D44;
+    cursor: pointer;
 }
 
 p.sortlbl {
@@ -756,6 +819,44 @@ p.sortlbl {
     float: right;
     font-size: 1.0em;
     color: #fff;
+}
+
+.itemList_Body {
+    padding-top: 10px;
+    background-color: #fff;
+}
+
+section#social {
+    padding: 20px 0px 20px 0px;
+    background-color: #333333;
+    color: #fff;
+    border-bottom: 4px solid #fff;
+}
+
+section#social .social-icon {
+    width: 45px;
+    height: 45px;
+}
+
+section#social h1 {
+    float: right;
+}
+
+section#social ul {
+    float: left;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+section#social li {
+    float: left;
+    padding-left: 10px;
+}
+
+section#comments {
+    background-color: #F7F5F5;
 }
 
 
