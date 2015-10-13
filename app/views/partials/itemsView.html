@@ -3,12 +3,23 @@
     <section class="itemList_Header">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-xs-4">
+                <div class="col-md-8 col-xs-12">
                     <h3><strong>Products</strong></h3>
                 </div>
-                <div class="col-md-4 col-md-offset-5 col-xs-8">
-                    <div class="form-group form-inline v-right
-">
+                <div class="col-md-2 col-xs-6">
+                    <div class="form-group form-inline v-right">
+                        <select class="form-control" ng-model="_pageSize" ng-change="perPageChange()">
+                            <option value="">Item Per Page</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                            <option value="All">All</option>
+                        </select>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <div class="form-group form-inline v-right">
                         <select class="form-control" ng-model="sortOrder" ng-change="sortChange()">
                             <option value="">Sort by</option>
                             <option value="views-desc">Popular</option>
@@ -26,7 +37,7 @@
         <div class="container">
             <div class="itemList_Body">
                 <div class="row">
-                    <div class="col-md-3" ng-repeat="item in items">
+                    <div class="col-md-3" dir-paginate="item in items| filter:q | itemsPerPage: pageSize" current-page="currentPage">
                         <div class="product-container">
                             <div class="product-block" ng-click="viewDetail(item)" data-toggle="modal" data-target="#modal">
                                 <div class="image">
@@ -48,6 +59,11 @@
                                 <span><p>Add To Cart</p></span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-6 center-block text-center">
+                        <dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
                     </div>
                 </div>
             </div>
@@ -136,4 +152,3 @@
     </div>
 </div> -->
     </div>
-</div>

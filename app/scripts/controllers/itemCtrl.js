@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('itemCtrl', ['itemService'])
+angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination'])
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.tab = 1;
         $scope.sortOrder = '';
         $scope.currentPage = 1;
+        $scope.pageSize = 8;
+        $scope.totalItems = 0;
         /// Init=====================
         Item.getItems()
             .success(function (response) {
@@ -13,6 +15,7 @@ angular.module('itemCtrl', ['itemService'])
                 angular.forEach($scope.items, function (item) {
                     item.orderQuantity = 1;
                 });
+                console.log(1);
             }).error(function (response) {
                 console.log(response);
             });
@@ -63,6 +66,17 @@ angular.module('itemCtrl', ['itemService'])
             item.orderQuantity = 1;
             $scope.$emit('add2Cart', item);
         };
+        $scope.pageChangeHandler = function (newPageNumber) {
+            console.log("page number " + newPageNumber);
+        };
+        $scope.perPageChange = function () {
+            if ($scope._pageSize !== '') {
+                $scope.pageSize = $scope._pageSize;
+            } else if ($scope._pageSize !== '') {
+                $scope.pageSize = $scope.items.length;
+            }
+            $scope.currentPage = 1;
+        };
     })
     .controller('ModalItemController', function ($scope, Item) {
         /* Open Item Detail in Modal*/
@@ -91,5 +105,4 @@ angular.module('itemCtrl', ['itemService'])
                 $scope.$emit('add2Cart', item);
             }
         };
-
     });

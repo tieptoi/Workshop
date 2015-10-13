@@ -3,6 +3,13 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-top: 50px;
+    margin-bottom: 60px;
+    background-color: #F8F8F8;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -672,6 +679,7 @@ button {
     /*margin-bottom: 10px;*/
     width: 100%;
     border-bottom: 1px solid #419941;
+    margin-bottom: 20px;
 }
 
 .itemList_Header p {
