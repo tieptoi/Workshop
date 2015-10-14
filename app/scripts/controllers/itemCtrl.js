@@ -3,6 +3,7 @@
 angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination'])
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
+        $scope.items = [];
         $scope.tab = 1;
         $scope.sortOrder = '';
         $scope.currentPage = 1;
@@ -15,7 +16,6 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
                 angular.forEach($scope.items, function (item) {
                     item.orderQuantity = 1;
                 });
-                console.log(1);
             }).error(function (response) {
                 console.log(response);
             });
@@ -23,8 +23,6 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
         /* View Item Detail in Modal*/
         $scope.viewDetail = function (item) {
             $scope.$emit('viewItemDetail', item);
-
-            //$scope.master = angular.copy($scope.item);
         };
 
         /* Get Price(if item on sale)*/
@@ -33,18 +31,8 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
                 return (item.price - (item.price * (item.discountPct / 100)));
             }
             return item.price;
-            //$scope.master = angular.copy($scope.item);
         };
 
-        $scope.getListOfPages = function (noOfItemPerPage) {
-            var noOfPages = Math.round($scope.items.length / noOfItemPerPage);
-            var pages = [];
-            var no = 1;
-            for (no = 1; no < noOfPages; no++) {
-                pages.push(no);
-            }
-            return pages;
-        };
         /* Check which page is selcted*/
         $scope.isCurrnetPage = function (pageNo) {
             return pageNo === $scope.currentPage;
@@ -61,14 +49,19 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
                 $scope.items = $filter('orderBy')($scope.items, $scope.sortOrder.split('-')[0], $scope.sortOrder.split('-')[1] === 'desc' ? true : false);
             }
         };
+
         /*  Add item to cart */
         $scope.add = function (item) {
             item.orderQuantity = 1;
             $scope.$emit('add2Cart', item);
         };
+
+        /* When page change occured */
         $scope.pageChangeHandler = function (newPageNumber) {
             console.log("page number " + newPageNumber);
         };
+
+        /* When choose number of item per page */
         $scope.perPageChange = function () {
             if ($scope._pageSize !== '') {
                 $scope.pageSize = $scope._pageSize;

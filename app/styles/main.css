@@ -1,10 +1,11 @@
 /* Customize container */
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Oswald-Regular', Arial, sans-serif;
     margin-top: 50px;
     margin-bottom: 60px;
     background-color: #F8F8F8;
+    font-size: 14px;
 }
 
 html {
@@ -60,10 +61,8 @@ html {
 /* Main marketing message and sign up button */
 
 .jumbotron {
-    background-image: url("/images/mac-glasses.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100%;
+    background: #F8F8F8 url("/images/mac-glasses.jpg") center center no-repeat;
+    background-size: cover;
     /*padding: 70px 0px 70px 0px;*/
     text-align: center;
     height: 450px;
@@ -654,7 +653,8 @@ button {
 
 .table-scrollable {
     max-height: 400px;
-    overflow-x: auto
+    overflow-x: auto;
+    width: 600px;
 }
 
 .center-block {
@@ -758,7 +758,8 @@ body {
 }
 
 section#middle {
-    margin: 00px 0 20px 0;
+    padding: 00px 0 20px 0;
+    background-color: #fff;
 }
 
 section#middle img {
@@ -864,7 +865,7 @@ section#social li {
 }
 
 section#comments {
-    background-color: #F7F5F5;
+    padding: 0px 0px 15px 0px;
 }
 
 

@@ -1,12 +1,7 @@
 'use strict';
 
 angular.module('navbarCtrl', ['ngCookies'])
-    .controller('NavbarController', function ($scope, $cookies, $location) {
-        //Define Properties
-        $scope.cart = {
-            items: [],
-            total: 0
-        };
+    .controller('NavbarController', function ($scope, $location) {
 
         $scope.menus = [{
             'title': 'Home',
@@ -26,6 +21,13 @@ angular.module('navbarCtrl', ['ngCookies'])
             return route === $location.path();
         };
 
+    }).controller('CartController', function ($scope, $cookies) {
+        //Define Properties
+        $scope.cart = {
+            items: [],
+            total: 0
+        };
+
         /* Add item to cart by listening on add2Cart event */
         $scope.$onRootScope('add2Cart', function (event, item) {
             //Check duplicate item in cart
@@ -34,7 +36,6 @@ angular.module('navbarCtrl', ['ngCookies'])
             angular.forEach($scope.cart.items, function (i) {
                 if (i.name === item.name) {
                     dup = true;
-                    console.log(i.orderQuantity);
                     i.orderQuantity = i.orderQuantity + item.orderQuantity;
                 }
             });
@@ -51,9 +52,16 @@ angular.module('navbarCtrl', ['ngCookies'])
                 });
 
                 // Setting a cookie
-                $cookies.putObject('cart', $scope.cart);
+                //$cookies.putObject('cart', $scope.cart);
             }
             $scope.changeQuantity();
+            //Show alert message
+            swal({
+                title: "Added to cart",
+                text: "I will close in 1 seconds.",
+                timer: 1000,
+                showConfirmButton: false
+            });
         });
 
         /* Remove item in cart */
@@ -63,7 +71,7 @@ angular.module('navbarCtrl', ['ngCookies'])
             }
             $scope.cart.items.splice($scope.cart.items.indexOf(item), 1);
             // Setting a cookie
-            $cookies.putObject('cart', $scope.cart);
+            //$cookies.putObject('cart', $scope.cart);
 
         };
 
@@ -76,12 +84,14 @@ angular.module('navbarCtrl', ['ngCookies'])
                 }
             });
         };
-
+        //Watch Cart if there are any changes
+        $scope.$watch('cart', function (newValue, oldValue) {
+            $cookies.putObject('cart', newValue);
+        }, true);
 
         // Retrieving a cookie
         if ($cookies.getObject('cart') && $cookies.getObject('cart') !== null) {
             $scope.cart = $cookies.getObject('cart');
             $scope.changeQuantity();
         }
-
     });
