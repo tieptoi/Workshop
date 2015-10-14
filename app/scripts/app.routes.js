@@ -8,8 +8,12 @@ angular.module('app.routes', ['ngRoute'])
                 controller: 'MainController'
             })
             .when('/items', {
-                templateUrl: 'partials/itemsView',
+                templateUrl: 'partials/item/itemsView',
                 controller: 'ItemController'
+            })
+            .when('/item/create', {
+                templateUrl: 'partials/item/createItemView',
+                controller: 'CreateItemController'
             })
             .otherwise({
                 redirectTo: '/'

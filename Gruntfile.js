@@ -71,7 +71,7 @@ module.exports = function (grunt) {
             },
             livereload: {
                 files: [
-                    '<%= yeoman.app %>/views/{,*//*}*.{html,jade}',
+                    '<%= yeoman.app %>/views/{,/**/}*.{html,jade}',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*//*}*.css',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js',
                     '<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
@@ -207,7 +207,7 @@ module.exports = function (grunt) {
                     src: [
                         '<%= yeoman.dist %>/public/scripts/{,*/}*.js',
                         '<%= yeoman.dist %>/public/styles/{,*/}*.css',
-                        '<%= yeoman.dist %>/public/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                        // '<%= yeoman.dist %>/public/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
                         '<%= yeoman.dist %>/public/styles/fonts/*'
                     ]
                 }
@@ -228,8 +228,8 @@ module.exports = function (grunt) {
 
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
-            html: ['<%= yeoman.dist %>/views/{,*/}*.html',
-                '<%= yeoman.dist %>/views/{,*/}*.jade'
+            html: ['<%= yeoman.dist %>/views/{,/**/}*.html',
+                '<%= yeoman.dist %>/views/{,/**/}*.jade'
             ],
             css: ['<%= yeoman.dist %>/public/styles/{,*/}*.css'],
             options: {
@@ -360,7 +360,7 @@ module.exports = function (grunt) {
             },
             dist: [
                 'copy:styles',
-                // 'imagemin',
+                'imagemin',
                 'svgmin',
                 'htmlmin'
             ]

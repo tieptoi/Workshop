@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination'])
+angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination', 'ngMessages'])
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.items = [];
@@ -97,5 +97,14 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
                 $('#modal').modal('hide');
                 $scope.$emit('add2Cart', item);
             }
+        };
+    })
+    .controller('CreateItemController', function ($scope, Item) {
+        $scope.item = {};
+        $scope.item.name = "";
+        $scope.item.category = "";
+        $scope.item.issale = true;
+        $scope.submitForm = function (isValid) {
+            console.log("test " + isValid);
         };
     });

@@ -20,13 +20,18 @@
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-repeat="menu in menus" ng-class="{active: isActive( '{{menu.link}}')}">
-                    <a ng-href="{{menu.link}}">{{menu.title}}</a>
+                <li ng-repeat="menu in menus" ng-class="{active: isActive('{{menu.link}}'),dropdown:hasSubMenu(menu)}">
+                    <a ng-class="{'dropdown-toggle':hasSubMenu(menu)}" ng-href="{{menu.link}}">{{menu.title}}<span class="caret" ng-show="hasSubMenu(menu)" aria-haspopup="true" aria-expanded="false"></span></a>
+                    <ul class="dropdown-menu" ng-show="hasSubMenu(menu)">
+                        <li ng-repeat="submenu in menu.submenus" ng-class="{active: isActive('{{submenu.link}}')}">
+                            <a ng-href="{{submenu.link}}">{{submenu.title}}</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="dropdown" ng-controller="CartController as Cart">
                     <a href class="dropdown-toggle" data-toggle="dropdown" id="btnCart">
                         <span class="glyphicon glyphicon-shopping-cart" ng-model="cart"></span> Cart <span class="label label-success">{{cart.items.length}}</span></a>
-                    <div class="row dropdown-menu table-scrollable" style="width:600px">
+                    <div class="row dropdown-menu table-scrollable">
                         <div id="cartTable" class="row">
                             <div class="col-md-12">
                                 <form name="cartForm" novalidate>

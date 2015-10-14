@@ -8,7 +8,14 @@ angular.module('navbarCtrl', ['ngCookies'])
             'link': '/'
         }, {
             'title': 'Items',
-            'link': '/items'
+            'link': '/items',
+            "submenus": [{
+                "link": "/item/edit",
+                "title": "Edit Item"
+            }, {
+                "link": "/item/create",
+                "title": "Create Item"
+            }],
         }, {
             'title': 'Contact Us',
             'link': '/contact'
@@ -21,6 +28,9 @@ angular.module('navbarCtrl', ['ngCookies'])
             return route === $location.path();
         };
 
+        $scope.hasSubMenu = function (menu) {
+            return ((menu.submenus) && (menu.submenus.length > 0));
+        };
     }).controller('CartController', function ($scope, $cookies) {
         //Define Properties
         $scope.cart = {
