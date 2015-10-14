@@ -2,14 +2,14 @@
     <div class="container">
         <form name="itemForm" class="form-horizontal" ng-submit="submitForm(itemForm.$valid)" novalidate>
             <div class="row">
-                <div class="col-md-offset-4 col-md-4 text-center">
+                <div class="col-md-offset-2 col-md-4 text-center">
                     <h1><strong>Create Item</strong></h1>
                 </div>
             </div>
             <!-- NAME -->
             <div class="form-group" ng-class="{ 'has-error': itemForm.name.$touched && itemForm.name.$invalid }">
                 <label class="control-label col-md-2 ">Name</label>
-                <div class="col-md-10 text-center">
+                <div class="col-md-5 text-center">
                     <input type="text" name="name" class="form-control" ng-model="item.name" placeholder="Name" required>
                     <div class="help-block" ng-messages="itemForm.name.$error" ng-show="itemForm.name.$touched">
                         <div ng-messages-include="template/ngMessage.html"></div>
@@ -19,7 +19,7 @@
             <!-- CATEGORY -->
             <div class="form-group">
                 <label class="control-label col-md-2 ">Category</label>
-                <div class="col-md-10 text-center">
+                <div class="col-md-5 text-center">
                     <select class="form-control" name="category" ng-model="item.category">
                         <option value="">Please select category</option>
                         <option>Shoes</option>
@@ -33,10 +33,21 @@
             <!-- DESCRIPTION -->
             <div class="form-group" ng-class="{ 'has-error': itemForm.description.$touched && itemForm.description.$invalid }">
                 <label class="control-label col-md-2 ">Description</label>
-                <div class="col-md-10 text-center">
-                    <textarea name="description" class="form-control" ng-model="item.description" ng-minlength="3" ng-maxlength="8" required></textarea>
+                <div class="col-md-7 text-center">
+                    <textarea name="description" class="form-control" ng-model="item.description" ng-minlength="3" ng-maxlength="8" required placeholder="Description"></textarea>
                     <div class="help-block" ng-messages="itemForm.description
 .$error" ng-show="itemForm.description.$touched">
+                        <div ng-messages-include="template/ngMessage.html"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Specification -->
+            <div class="form-group" ng-class="{ 'has-error': itemForm.specification.$touched && itemForm.specification.$invalid }">
+                <label class="control-label col-md-2 ">Specification</label>
+                <div class="col-md-7 text-center">
+                    <textarea name="specification" class="form-control" ng-model="item.specification" ng-minlength="3" ng-maxlength="8" required placeholder="Specification"></textarea>
+                    <div class="help-block" ng-messages="itemForm.specification
+.$error" ng-show="itemForm.specification.$touched">
                         <div ng-messages-include="template/ngMessage.html"></div>
                     </div>
                 </div>
@@ -44,15 +55,16 @@
             <!-- PRICE -->
             <div class="form-group" ng-class="{ 'has-error': itemForm.price.$touched && itemForm.price.$invalid }">
                 <label class="control-label col-md-2 ">Price</label>
-                <div class="col-md-10 text-center">
-                    <input type="number" name="price" class="form-control" ng-model="item.price" required>
+                <div class="col-md-3 text-center">
+                    <input type="number" name="price" class="form-control" ng-model="item.price" ng-minlength="1" ng-maxlength="3" min="0" max="999" required>
                     <div class="help-block" ng-messages="itemForm.price.$error" ng-show="itemForm.price.$touched">
-                        <div ng-messages-include="template/ngMessage.html"></div>
+                        <div ng-messages-include="template/ngMessage.num.html"></div>
                     </div>
                 </div>
             </div>
+            <!-- Images -->
             <div class="form-group">
-                <label class="control-label col-md-2 ">File input</label>
+                <label class="control-label col-md-2 ">Images</label>
                 <div class="col-md-10 text-center">
                     <input type="file" id="exampleInputFile">
                 </div>
@@ -60,10 +72,10 @@
             <!-- QUANTITY -->
             <div class="form-group" ng-class="{ 'has-error': itemForm.quantity.$touched && itemForm.quantity.$invalid }">
                 <label class="control-label col-md-2 ">Quanity</label>
-                <div class="col-md-10 text-center">
-                    <input type="number" name="quantity" class="form-control" ng-model="item.quantity" ng-minlength="3" ng-maxlength="8" required>
+                <div class="col-md-3 text-center">
+                    <input type="number" name="quantity" class="form-control" ng-model="item.quantity" ng-minlength="1" ng-maxlength="3" min="0" max="999" required>
                     <div class="help-block" ng-messages="itemForm.quantity.$error" ng-show="itemForm.quantity.$touched">
-                        <div ng-messages-include="template/ngMessage.html"></div>
+                        <div ng-messages-include="template/ngMessage.num.html"></div>
                     </div>
                 </div>
             </div>
@@ -77,6 +89,16 @@
                     </div>
                 </div>
             </div>
+            <!-- DISCOUNT PERCENTAGE -->
+            <div class="form-group" ng-class="{ 'has-error': itemForm.discountPct.$touched && itemForm.discountPct.$invalid }" ng-show="item.issale">
+                <label class="control-label col-md-2">Discount(%)</label>
+                <div class="col-md-3 text-center">
+                    <input type="number" name="discountPct" class="form-control" ng-model="item.discountPct" ng-disabled="!item.issale" placeholder="%">
+                    <div class="help-block" ng-messages="itemForm.discountPct.$error" ng-show="itemForm.discountPct.$touched">
+                        <div ng-messages-include="template/ngMessage.num.html"></div>
+                    </div>
+                </div>
+            </div>
             <!-- Can be purchased -->
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -84,16 +106,6 @@
                         <label>
                             <input type="checkbox" ng-model="item.canPurchase"> Can be purchased
                         </label>
-                    </div>
-                </div>
-            </div>
-            <!-- DISCOUNT PERCENTAGE -->
-            <div class="form-group" ng-class="{ 'has-error': itemForm.discountPct.$touched && itemForm.discountPct.$invalid }">
-                <label class="control-label col-md-2">Discount(%)</label>
-                <div class="col-md-10 text-center">
-                    <input type="number" name="discountPct" class="form-control" ng-model="item.discountPct" ng-minlength="3" ng-maxlength="8">
-                    <div class="help-block" ng-messages="itemForm.discountPct.$error" ng-show="itemForm.discountPct.$touched">
-                        <div ng-messages-include="template/ngMessage.html"></div>
                     </div>
                 </div>
             </div>

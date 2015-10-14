@@ -4,7 +4,7 @@ angular.module('app.routes', ['ngRoute'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'partials/mainView',
+                templateUrl: 'partials/shared/mainView',
                 controller: 'MainController'
             })
             .when('/items', {
