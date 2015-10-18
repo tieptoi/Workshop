@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('todoApp')
+angular.module('todoApp', [])
     .directive('itemNameAvailableValidator', ['$http', function ($http) {
         return {
             require: 'ngModel',

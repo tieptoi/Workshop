@@ -4,9 +4,11 @@
   "description": "My First App in MEAN Stack",
   "dependencies": {
     "body-parser": "^1.14.1",
+    "connect-busboy": "0.0.2",
     "ejs": "2.3.3",
     "errorhandler": "^1.4.2",
     "express": "4.13.3",
+    "fs-extra": "^0.24.0",
     "lodash": "3.10.1",
     "method-override": "^2.3.5",
     "mongoose": "~3.8.8",

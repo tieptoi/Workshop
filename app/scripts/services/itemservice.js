@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('itemService', [])
+angular.module('itemService'
+, [])
     .service('Item', function Service($http) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         //GET============================

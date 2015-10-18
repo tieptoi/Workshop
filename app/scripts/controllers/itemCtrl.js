@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination', 'ngMessages'])
+angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination', 'ngMessages', 'angularFileUpload'])
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.items = [];
@@ -99,11 +99,45 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
             }
         };
     })
-    .controller('CreateItemController', function ($scope, Item) {
+    .controller('CreateItemController', function ($scope, Item, FileUploader) {
+        var uploader = $scope.uploader = new FileUploader({
+            url: "/api/upload",
+            queueLimit: 5
+        });
         $scope.item = {};
         $scope.item.name = "";
         $scope.item.category = "";
         $scope.item.issale = true;
+
+        //Adding Filter for upload control
+        uploader.filters.push({
+            name: 'photoType',
+            // A user-defined filter
+            fn: function (item) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
+        });
+
+        uploader.filters.push({
+            name: 'isDuplicate',
+            // A user-defined filter
+            fn: function (item) {
+                for (var i = 0; i < uploader.queue.length; i++) {
+                    if (uploader.queue[i]._file.name === item.name && uploader.queue[i]._file.size === item.size) return false;
+                }
+                return true;
+            }
+        });
+
+        uploader.onAfterAddingFile = function (item) {
+            // console.log(item);
+        };
+        uploader.onWhenAddingFileFailed = function (item, filter, options) {
+            console.log(item);
+            console.log(filter);
+            console.log(options);
+        };
         $scope.submitForm = function (isValid) {
             console.log("test " + isValid);
         };
