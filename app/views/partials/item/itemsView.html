@@ -37,7 +37,7 @@
         <div class="container">
             <div class="itemList_Body">
                 <div class="row">
-                    <div class="col-md-3" dir-paginate="item in items| filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                    <div class="col-md-3" dir-paginate="item in items| filter:q | itemsPerPage: pageSize" current-page="currentPage" total-items="totalItems">
                         <div class="product-container">
                             <div class="product-block" ng-click="viewDetail(item)" data-toggle="modal" data-target="#modal">
                                 <div class="image">
