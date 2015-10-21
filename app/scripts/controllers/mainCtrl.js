@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mainCtrl', ['thingService'])
+angular.module('todoApp')
     .controller('MainController', function ($scope, Thing) {
         //var thing = { name : 'HTML5 Boilerplate',
         //              info : 'HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.',

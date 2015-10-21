@@ -4,7 +4,7 @@ body {
     font-family: 'Oswald-Regular', Arial, sans-serif;
     margin-top: 50px;
     margin-bottom: 60px;
-    background-color: #FFFF;
+    /*background-color: #FFFF;*/
     font-size: 14px;
 }
 
@@ -24,6 +24,16 @@ h6 {
 html {
     position: relative;
     min-height: 100%;
+}
+
+.navbar-default {
+    color: #fff;
+    background: #fff;
+}
+
+.navbar {
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
 }
 
 .top-ln-light-gray {
@@ -850,6 +860,9 @@ section.social {
     background-color: #333333;
     color: #fff;
     border-bottom: 2px solid #fff;
+    position: absolute;
+    bottom: 70px;
+    width: 100%;
 }
 
 section.social .social-icon {
@@ -894,6 +907,72 @@ canvas {
     border: 1px solid #c3c3c3;
     height: 100px;
     margin: 6px 0 0 6px;
+}
+
+.signup-or-separator {
+    position: relative;
+    height: 29px;
+    margin: 5px 0;
+    text-align: center;
+    background: none;
+}
+
+.signup-or-separator hr {
+    width: 90%;
+    margin: -16px auto 10px auto;
+    border-top: 1px solid #dce0e0;
+}
+
+.signup-or-separator .text {
+    display: inline-block;
+    padding: 8px;
+    margin: 0;
+    background-color: #fff;
+}
+
+.has-feedback .form-control-feedback {
+    top: 0;
+    left: 0;
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    color: #555;
+}
+
+[class^='ion-'] {
+    font-size: 1.2em;
+}
+
+.has-feedback .form-control {
+    padding-left: 42px;
+}
+
+.btn-instagram {
+    color: #fff;
+    background-color: #517fa4;
+    border: 1px solid #456c8c;
+}
+
+.btn-instagram:hover,
+.btn-instagram:focus {
+    color: #fff;
+    background-color: #303030;
+}
+
+.center-form {
+    width: 330px;
+    margin: 12% auto;
+}
+
+.panel {
+    border-color: #cfd9D7;
+    border-radius: 2px;
+    box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
+}
+
+.panel-body>h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
 }
 
 

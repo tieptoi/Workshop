@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination', 'ngMessages', 'angularFileUpload'])
+angular.module('todoApp')
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.items = [];
