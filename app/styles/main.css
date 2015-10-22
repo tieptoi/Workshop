@@ -1,9 +1,15 @@
-/* Customize container */
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
 
 body {
     font-family: 'Oswald-Regular', Arial, sans-serif;
     margin-top: 50px;
-    margin-bottom: 60px;
+    margin-bottom: 150px;
     /*background-color: #FFFF;*/
     font-size: 14px;
 }
@@ -19,11 +25,6 @@ h6 {
     text-shadow: none;
     font-weight: normal;
     font-family: "Open Sans", Arial, sans-serif;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
 }
 
 .navbar-default {
@@ -717,20 +718,6 @@ button {
     text-align: left;
 }
 
-
-/* Sticky footer styles
--------------------------------------------------- */
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 70px;
-}
-
 .footer {
     position: absolute;
     bottom: 0;
@@ -883,7 +870,7 @@ section.social li {
 }
 
 section.comments {
-    padding: 0px 0px 15px 0px;
+    padding: 0px 0px 10px 0px;
 }
 
 section.comments .media {
@@ -961,7 +948,7 @@ canvas {
 
 .center-form {
     width: 330px;
-    margin: 12% auto;
+    margin: 3% auto 20%;
 }
 
 .panel {
