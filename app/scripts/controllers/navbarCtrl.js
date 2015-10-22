@@ -4,31 +4,34 @@ angular.module('todoApp')
     .controller('NavbarController', function ($scope, $location) {
 
         $scope.menus = [{
-            'title': 'Home',
-            'link': '/'
+            title: 'Home',
+            link: '/'
         }, {
-            'title': 'Items',
-            'link': '/items',
-            "submenus": [{
-                "link": "/item/edit",
-                "title": "Edit Item"
+            title: 'Item',
+            link: '/item',
+            submenus: [{
+                link: '/item/edit',
+                title: 'Edit Item'
             }, {
-                "link": "/item/create",
-                "title": "Create Item"
+                link: '/item/create',
+                title: 'Create Item'
             }],
         }, {
-            'title': 'Contact Us',
-            'link': '/contact'
+            title: 'Contact Us',
+            link: '/contact'
         }, {
-            'title': 'About Us',
-            'link': '/about'
+            title: 'About Us',
+            link: '/about'
         }];
 
         $scope.isActive = function (route) {
-            return route === $location.path();
+            // var type = '|' + route.slice(route.lastIndexOf('/') + 1) + '|';
+            // console.log(route + ': ' + type);
+            return route === $location.path() || (route.length > 1 && $location.path().indexOf(route) > -1);
         };
 
         $scope.hasSubMenu = function (menu) {
+            //return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             return ((menu.submenus) && (menu.submenus.length > 0));
         };
     }).controller('CartController', function ($scope, $cookies) {
@@ -67,8 +70,8 @@ angular.module('todoApp')
             $scope.changeQuantity();
             //Show alert message
             swal({
-                title: "Added to cart",
-                text: "I will close in 1 seconds.",
+                title: 'Added to cart',
+                text: 'I will close in 1 seconds.',
                 timer: 1000,
                 showConfirmButton: false
             });

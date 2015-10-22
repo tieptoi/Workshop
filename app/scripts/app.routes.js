@@ -7,7 +7,7 @@ angular.module('app.routes', ['ngRoute'])
                 templateUrl: 'partials/shared/mainView',
                 controller: 'MainController'
             })
-            .when('/items', {
+            .when('/item', {
                 templateUrl: 'partials/item/itemsView',
                 controller: 'ItemController'
             })
@@ -16,7 +16,7 @@ angular.module('app.routes', ['ngRoute'])
                 controller: 'CreateItemController'
             })
             .when('/login', {
-                templateUrl: 'partials/login/login',
+                templateUrl: 'partials/auth/login',
                 controller: 'LoginController'
             })
             .otherwise({

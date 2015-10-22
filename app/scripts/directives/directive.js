@@ -20,17 +20,21 @@ angular.module('todoApp')
             template: '<canvas/>',
             link: function (scope, element, attributes) {
                 //console.log(helper.support);
-                if (!helper.support) return;
+                if (!helper.support) {
+                    return;
+                }
 
                 var params = scope.$eval(attributes.ngThumb);
 
-                if (!helper.isFile(params.file)) return;
-                if (!helper.isImage(params.file)) return;
+                if (!helper.isFile(params.file)) {
+                    return;
+                }
+                if (!helper.isImage(params.file)) {
+                    return;
+                }
 
                 var canvas = element.find('canvas');
                 var reader = new FileReader();
-
-                reader.onload = onLoadFile;
                 reader.readAsDataURL(params.file);
 
                 function onLoadFile(event) {
@@ -38,6 +42,8 @@ angular.module('todoApp')
                     img.onload = onLoadImage;
                     img.src = event.target.result;
                 }
+
+                reader.onload = onLoadFile;
 
                 function onLoadImage() {
                     var width = params.width || this.width / this.height * params.height;

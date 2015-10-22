@@ -28,13 +28,28 @@ h6 {
 }
 
 .navbar-default {
-    color: #fff;
     background: #fff;
 }
 
 .navbar {
     border: 0;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+    border-radius: 0px;
+    border-bottom: 3px solid #48A548;
+    background-color: #FFF;
+    color: #48A548;
+}
+
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:focus,
+.dropdown-menu>.active>a:hover {
+    color: #333333;
+    background-color: #eee;
 }
 
 .top-ln-light-gray {
@@ -685,7 +700,7 @@ button {
 
 .table-scrollable {
     max-height: 400px;
-    overflow-x: auto;
+    overflow-x: scroll;
     width: 600px;
 }
 
@@ -855,12 +870,14 @@ section.social {
 section.social .social-icon {
     width: 45px;
     height: 45px;
+    margin: 0 auto;
 }
 
 section.social ul {
     padding: 0;
     margin: 0;
     margin-top: 10px;
+    height: 100%;
     list-style-type: none;
 }
 
@@ -940,6 +957,18 @@ canvas {
     border: 1px solid #456c8c;
 }
 
+.btn-facebook {
+    color: #fff;
+    background-color: #44619D;
+    border: 1px solid #A4C6FD;
+}
+
+.btn-facebook:hover,
+.btn-facebook:focus {
+    color: #fff;
+    background-color: #294786;
+}
+
 .btn-instagram:hover,
 .btn-instagram:focus {
     color: #fff;
@@ -948,7 +977,7 @@ canvas {
 
 .center-form {
     width: 330px;
-    margin: 3% auto 20%;
+    margin: 10% auto;
 }
 
 .panel {
@@ -960,7 +989,4 @@ canvas {
 .panel-body>h2 {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-}
-
-
 }

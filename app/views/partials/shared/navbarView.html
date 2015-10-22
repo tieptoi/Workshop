@@ -21,7 +21,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-repeat="menu in menus" ng-class="{active: isActive('{{menu.link}}'),dropdown:hasSubMenu(menu)}">
-                    <a ng-class="{'dropdown-toggle':hasSubMenu(menu)}" ng-href="{{menu.link}}">{{menu.title}}<span class="caret" ng-show="hasSubMenu(menu)" aria-haspopup="true" aria-expanded="false"></span></a>
+                    <a ng-class="{'dropdown-toggle':hasSubMenu(menu)}" ng-href="{{menu.link}}">{{menu.title}} <span class="caret" ng-show="hasSubMenu(menu)" aria-haspopup="true" aria-expanded="false"></span></a>
                     <ul class="dropdown-menu" ng-show="hasSubMenu(menu)">
                         <li ng-repeat="submenu in menu.submenus" ng-class="{active: isActive('{{submenu.link}}')}">
                             <a ng-href="{{submenu.link}}">{{submenu.title}}</a>

@@ -122,12 +122,12 @@ angular.module('todoApp')
     })
     .controller('CreateItemController', function ($scope, Item, FileUploader) {
         var uploader = $scope.uploader = new FileUploader({
-            url: "/api/upload",
+            url: '/api/upload',
             queueLimit: 5
         });
         $scope.item = {};
-        $scope.item.name = "";
-        $scope.item.category = "";
+        $scope.item.name = '';
+        $scope.item.category = '';
         $scope.item.issale = true;
 
         //Adding Filter for upload control
@@ -145,7 +145,9 @@ angular.module('todoApp')
             // A user-defined filter
             fn: function (item) {
                 for (var i = 0; i < uploader.queue.length; i++) {
-                    if (uploader.queue[i]._file.name === item.name && uploader.queue[i]._file.size === item.size) return false;
+                    if (uploader.queue[i]._file.name === item.name && uploader.queue[i]._file.size === item.size) {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -160,6 +162,6 @@ angular.module('todoApp')
             console.log(options);
         };
         $scope.submitForm = function (isValid) {
-            console.log("test " + isValid);
+            console.log('test ' + isValid);
         };
     });

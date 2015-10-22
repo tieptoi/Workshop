@@ -1,6 +1,5 @@
 'use strict';
 
-angular.module('todoApp')
-    .controller('LoginController', function ($scope) {
+angular.module('todoApp').controller('LoginController', function ($scope) {
 
-    });
+});
