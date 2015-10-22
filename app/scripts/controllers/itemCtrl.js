@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPagination', 'ngMessages', 'angularFileUpload'])
+angular.module('todoApp')
     .controller('ItemController', function ($scope, $filter, Item) {
         /// Properties===============
         $scope.items = [];
@@ -10,15 +10,30 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
         $scope.pageSize = 8;
         $scope.totalItems = 0;
         /// Init=====================
-        Item.getItems()
+        // Item.getItems()
+        //     .success(function (response) {
+        //         $scope.items = response;
+        //         angular.forEach($scope.items, function (item) {
+        //             item.orderQuantity = 1;
+        //         });
+        //     }).error(function (response) {
+        //         console.log(response);
+        //     });
+        Item.getItemsByPages($scope.currentPage, $scope.pageSize, 'name')
             .success(function (response) {
+                //console.error(response);
                 $scope.items = response;
-                angular.forEach($scope.items, function (item) {
-                    item.orderQuantity = 1;
-                });
             }).error(function (response) {
                 console.log(response);
             });
+        Item.getNoOfItems()
+            .success(function (response) {
+                $scope.totalItems = response;
+            }).error(function (response) {
+                console.log(response);
+            });
+
+
 
         /* View Item Detail in Modal*/
         $scope.viewDetail = function (item) {
@@ -32,16 +47,16 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
             }
             return item.price;
         };
+        // /* Check which page is selcted*/
+        // $scope.isCurrnetPage = function (pageNo) {
+        //     return pageNo === $scope.currentPage;
+        // };
 
-        /* Check which page is selcted*/
-        $scope.isCurrnetPage = function (pageNo) {
-            return pageNo === $scope.currentPage;
-        };
+        // /* Set Current selected page*/
+        // $scope.setPage = function (pageNo) {
+        //     $scope.currentPage = pageNo;
+        // };
 
-        /* Set Current selected page*/
-        $scope.setPage = function (pageNo) {
-            $scope.currentPage = pageNo;
-        };
 
         //Sort List of Items according to user's selection.
         $scope.sortChange = function () {
@@ -58,7 +73,13 @@ angular.module('itemCtrl', ['itemService', 'angularUtils.directives.dirPaginatio
 
         /* When page change occured */
         $scope.pageChangeHandler = function (newPageNumber) {
-            console.log("page number " + newPageNumber);
+            Item.getItemsByPages(newPageNumber, $scope.pageSize, 'name')
+                .success(function (response) {
+                    //console.error(response);
+                    $scope.items = response;
+                }).error(function (response) {
+                    console.log(response);
+                });
         };
 
         /* When choose number of item per page */

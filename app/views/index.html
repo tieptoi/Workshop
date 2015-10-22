@@ -15,13 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(app) styles/vendor.css -->
-    <link rel="stylesheet" href="bower_components\bootstrap\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 </head>
 
@@ -70,18 +71,19 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- main Angular app files -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/app.routes.js"></script>
     <!-- controllers -->
     <script src="scripts/controllers/mainCtrl.js"></script>
     <script src="scripts/controllers/itemCtrl.js"></script>
+    <script src="scripts/controllers/loginCtrl.js"></script>
     <script src="scripts/controllers/navbarCtrl.js"></script>
     <!-- services -->
     <script src="scripts/services/thingService.js"></script>
     <script src="scripts/services/itemService.js"></script>
     <!-- directive -->
     <script src="scripts/directives/directive.js"></script>
-    <!-- main Angular app files -->
-    <script src="scripts/app.routes.js"></script>
-    <script src="scripts/app.js"></script>
     <!-- endbuild -->
 </body>
 

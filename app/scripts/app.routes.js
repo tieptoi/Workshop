@@ -15,6 +15,10 @@ angular.module('app.routes', ['ngRoute'])
                 templateUrl: 'partials/item/createItemView',
                 controller: 'CreateItemController'
             })
+            .when('/login', {
+                templateUrl: 'partials/login/login',
+                controller: 'LoginController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('thingService'
-, [])
+angular.module('todoApp')
     .service('Thing', function Service($http) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.getThings = function () {

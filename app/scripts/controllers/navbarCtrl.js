@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('navbarCtrl', ['ngCookies'])
+angular.module('todoApp')
     .controller('NavbarController', function ($scope, $location) {
 
         $scope.menus = [{
