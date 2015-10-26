@@ -42,6 +42,7 @@ angular.module('todoApp')
 
         /* Get Price(if item on sale)*/
         $scope.getPrice = function (item) {
+            //console.log(item);
             if (item.isSale) {
                 return (item.price - (item.price * (item.discountPct / 100)));
             }
@@ -120,7 +121,7 @@ angular.module('todoApp')
             }
         };
     })
-    .controller('CreateItemController', function ($scope, Item, FileUploader) {
+    .controller('CreateItemController', function ($scope, $location, Item, FileUploader) {
         var uploader = $scope.uploader = new FileUploader({
             url: '/api/upload',
             queueLimit: 5
@@ -130,6 +131,26 @@ angular.module('todoApp')
         $scope.item.category = '';
         $scope.item.issale = true;
 
+        (function () {
+            var params = $location.search();
+            if (params && params.id && params.id != '') {
+                Item.getItemByID(params.id)
+                    .success(function (resp) {
+                        $scope.item = resp;
+                        Item.getImages(resp.image)
+                            .success(function (data, status, headers, config) {
+                                var file = new File([data], resp.image, {
+                                    type: data.type
+                                });
+                                //console.log(data.type);
+                                uploader.addToQueue(file);
+                            });
+                    })
+                    .error(function (err) {
+                        console.error(err);
+                    });
+            }
+        })();
         //Adding Filter for upload control
         uploader.filters.push({
             name: 'photoType',
@@ -154,7 +175,7 @@ angular.module('todoApp')
         });
 
         uploader.onAfterAddingFile = function (item) {
-            // console.log(item);
+            console.log(uploader.queue);
         };
         uploader.onWhenAddingFileFailed = function (item, filter, options) {
             console.log(item);
@@ -162,6 +183,19 @@ angular.module('todoApp')
             console.log(options);
         };
         $scope.submitForm = function (isValid) {
+            console.log($scope.item);
+            Item.updateItem($scope.item)
+                .success(function (res) {
+                    //Show alert message
+                    swal({
+                        title: res,
+                        text: 'I will close in 1 seconds.',
+                        timer: 1000,
+                        showConfirmButton: false
+                    });
+                }).error(function (err) {
+                    console.error(err);
+                });
             console.log('test ' + isValid);
         };
     });

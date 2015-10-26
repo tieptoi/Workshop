@@ -7,7 +7,10 @@ angular.module('todoApp')
         this.getItems = function () {
             return $http.get('/api/items');
         };
-
+        //GET BY ID============================
+        this.getItemByID = function (id) {
+            return $http.get('/api/item/_id/' + id);
+        };
         //GET No Of Items============================
         this.getNoOfItems = function () {
             return $http.get('/api/noOfItems');
@@ -28,6 +31,18 @@ angular.module('todoApp')
         //Update ==========================
         this.updateItem = function (item) {
             return $http.post('/api/updateItem', JSON.stringify(item));
+        };
+        //Update ==========================
+        this.getImages = function (name) {
+            var req = {
+                method: 'GET',
+                url: '/images/' + name,
+                responseType: 'blob'
+
+            };
+
+            return $http(req);
+            //return $http.get('images/' + name);
         };
         //Delete ==========================
         //this.getThing = function (id) {

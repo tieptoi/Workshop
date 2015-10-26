@@ -75,6 +75,7 @@ angular.module('todoApp')
                 timer: 1000,
                 showConfirmButton: false
             });
+
         });
 
         /* Remove item in cart */

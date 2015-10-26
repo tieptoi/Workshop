@@ -22,11 +22,11 @@
                 <div class="col-md-5 text-center">
                     <select class="form-control" name="category" ng-model="item.category">
                         <option value="">Please select category</option>
-                        <option>Shoes</option>
-                        <option>Bag</option>
-                        <option>Clothes</option>
-                        <option>Wallet</option>
-                        <option>Other</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Bag">Bag</option>
+                        <option value="Clothes">Clothes</option>
+                        <option value="Wallet">Wallet</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <div class="form-group" ng-class="{ 'has-error': itemForm.description.$touched && itemForm.description.$invalid }">
                 <label class="control-label col-md-2 ">Description</label>
                 <div class="col-md-7 text-center">
-                    <textarea name="description" class="form-control" ng-model="item.description" ng-minlength="3" ng-maxlength="8" required placeholder="Description"></textarea>
+                    <textarea name="description" class="form-control" ng-model="item.description" ng-minlength="10" ng-maxlength="200" required placeholder="Description"></textarea>
                     <div class="help-block" ng-messages="itemForm.description
 .$error" ng-show="itemForm.description.$touched">
                         <div ng-messages-include="template/ngMessage.html"></div>
@@ -45,7 +45,7 @@
             <div class="form-group" ng-class="{ 'has-error': itemForm.specification.$touched && itemForm.specification.$invalid }">
                 <label class="control-label col-md-2 ">Specification</label>
                 <div class="col-md-7 text-center">
-                    <textarea name="specification" class="form-control" ng-model="item.specification" ng-minlength="3" ng-maxlength="8" required placeholder="Specification"></textarea>
+                    <textarea name="specification" class="form-control" ng-model="item.specification" ng-minlength="10" ng-maxlength="200" required placeholder="Specification"></textarea>
                     <div class="help-block" ng-messages="itemForm.specification
 .$error" ng-show="itemForm.specification.$touched">
                         <div ng-messages-include="template/ngMessage.html"></div>
@@ -133,16 +133,16 @@
                 <div class="col-md-offset-2 col-md-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="item.issale"> Is Sale
+                            <input type="checkbox" ng-model="item.isSale"> Is Sale
                         </label>
                     </div>
                 </div>
             </div>
             <!-- DISCOUNT PERCENTAGE -->
-            <div class="form-group" ng-class="{ 'has-error': itemForm.discountPct.$touched && itemForm.discountPct.$invalid }" ng-show="item.issale">
+            <div class="form-group" ng-class="{ 'has-error': itemForm.discountPct.$touched && itemForm.discountPct.$invalid }" ng-show="item.isSale">
                 <label class="control-label col-md-2">Discount(%)</label>
                 <div class="col-md-3 text-center">
-                    <input type="number" name="discountPct" class="form-control" ng-model="item.discountPct" ng-disabled="!item.issale" placeholder="%">
+                    <input type="number" name="discountPct" class="form-control" ng-model="item.discountPct" ng-disabled="!item.isSale" placeholder="%">
                     <div class="help-block" ng-messages="itemForm.discountPct.$error" ng-show="itemForm.discountPct.$touched">
                         <div ng-messages-include="template/ngMessage.num.html"></div>
                     </div>
