@@ -10,19 +10,13 @@ angular.module('todoApp')
         $scope.pageSize = 8;
         $scope.totalItems = 0;
         /// Init=====================
-        // Item.getItems()
-        //     .success(function (response) {
-        //         $scope.items = response;
-        //         angular.forEach($scope.items, function (item) {
-        //             item.orderQuantity = 1;
-        //         });
-        //     }).error(function (response) {
-        //         console.log(response);
-        //     });
         Item.getItemsByPages($scope.currentPage, $scope.pageSize, 'name')
             .success(function (response) {
                 //console.error(response);
                 $scope.items = response;
+                angular.forEach($scope.items, function (item) {
+                    item.orderQuantity = 1;
+                });
             }).error(function (response) {
                 console.log(response);
             });
@@ -93,7 +87,7 @@ angular.module('todoApp')
             $scope.currentPage = 1;
         };
     })
-    .controller('ModalItemController', function ($scope, Item) {
+    .controller('ModalItemController', function ($scope, Item, $location) {
         /* Open Item Detail in Modal*/
         $scope.$onRootScope('viewItemDetail', function (event, item) {
             item.views = item.views + 1;
@@ -120,21 +114,30 @@ angular.module('todoApp')
                 $scope.$emit('add2Cart', item);
             }
         };
+        /*  Edit item infor */
+        $scope.edit = function (item) {
+            $('#modal').on('hidden.bs.modal', function () {
+                $location.path("/item/edit/id/" + item._id);
+                console.log("/item/edit/id/" + item._id);
+                $scope.$apply();
+            });
+            $('#modal').modal('hide');
+        };
     })
-    .controller('CreateItemController', function ($scope, $location, Item, FileUploader) {
+    .controller('CreateItemController', function ($scope, $location, Item, FileUploader, $routeParams) {
         var uploader = $scope.uploader = new FileUploader({
             url: '/api/upload',
             queueLimit: 5
         });
+        $scope.id = $routeParams.qvalue;
         $scope.item = {};
         $scope.item.name = '';
         $scope.item.category = '';
         $scope.item.issale = true;
 
         (function () {
-            var params = $location.search();
-            if (params && params.id && params.id != '') {
-                Item.getItemByID(params.id)
+            if ($scope.id && $scope.id != '') {
+                Item.getItemByID($scope.id)
                     .success(function (resp) {
                         $scope.item = resp;
                         Item.getImages(resp.image)
@@ -150,6 +153,15 @@ angular.module('todoApp')
                         console.error(err);
                     });
             }
+            var path = $location.path().split('/');
+            //console.log(path.indexOf('edit'));
+            if (path && path.indexOf('edit') !== -1) {
+                $scope.header = "Edit Item";
+            } else {
+                $scope.header = "Create Item";
+            }
+
+
         })();
         //Adding Filter for upload control
         uploader.filters.push({
@@ -175,7 +187,7 @@ angular.module('todoApp')
         });
 
         uploader.onAfterAddingFile = function (item) {
-            console.log(uploader.queue);
+            //console.log(uploader.queue);
         };
         uploader.onWhenAddingFileFailed = function (item, filter, options) {
             console.log(item);
@@ -183,19 +195,37 @@ angular.module('todoApp')
             console.log(options);
         };
         $scope.submitForm = function (isValid) {
-            console.log($scope.item);
-            Item.updateItem($scope.item)
-                .success(function (res) {
-                    //Show alert message
-                    swal({
-                        title: res,
-                        text: 'I will close in 1 seconds.',
-                        timer: 1000,
-                        showConfirmButton: false
-                    });
-                }).error(function (err) {
-                    console.error(err);
-                });
-            console.log('test ' + isValid);
+            //console.log($scope.item);
+            //Show alert message
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this item!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#A5DC86",
+                confirmButtonText: "Yes, save it!",
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            }, function () {
+                setTimeout(function () {
+                    Item.updateItem($scope.item)
+                        .success(function (res) {
+                            swal({
+                                title: "Saved!",
+                                text: "Your item has been saved.",
+                                type: "success",
+                                timer: 1000,
+                                showConfirmButton: false
+                                    // }, function () {
+                                    //     console.log("test");
+                                    //$location.path('/');
+                                    //$scope.$apply();
+                            });
+                        }).error(function (err) {
+                            console.error(err);
+                        });
+                }, 2000);
+            });
+
         };
     });

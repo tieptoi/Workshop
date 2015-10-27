@@ -15,7 +15,7 @@ angular.module('app.routes', ['ngRoute'])
                 templateUrl: 'partials/item/createItemView',
                 controller: 'CreateItemController'
             })
-            .when('/item/edit', {
+            .when('/item/edit/:qkey/:qvalue', {
                 templateUrl: 'partials/item/createItemView',
                 controller: 'CreateItemController'
             })

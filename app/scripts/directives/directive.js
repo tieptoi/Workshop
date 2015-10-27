@@ -36,14 +36,11 @@ angular.module('todoApp')
                 var canvas = element.find('canvas');
                 var reader = new FileReader();
                 reader.readAsDataURL(params.file);
-                console.log(reader);
 
                 function onLoadFile(event) {
                     var img = new Image();
                     img.onload = onLoadImage;
                     img.src = event.target.result;
-
-                    console.log(event.target.result);
                 }
 
                 reader.onload = onLoadFile;

@@ -1,21 +1,22 @@
-'use strict';
-
 angular.module('todoApp')
     .controller('NavbarController', function ($scope, $location) {
-
+        'use strict';
         $scope.menus = [{
             title: 'Home',
             link: '/'
         }, {
             title: 'Item',
             link: '/item',
-            submenus: [{
-                link: '/item/edit',
-                title: 'Edit Item'
-            }, {
+            submenus: [
+            // {
+ //     link: '/item/edit',
+ //     title: 'Edit Item'
+ // },
+
+             {
                 link: '/item/create',
                 title: 'Create Item'
-            }],
+            }]
         }, {
             title: 'Contact Us',
             link: '/contact'
@@ -35,6 +36,7 @@ angular.module('todoApp')
             return ((menu.submenus) && (menu.submenus.length > 0));
         };
     }).controller('CartController', function ($scope, $cookies) {
+        'use strict';
         //Define Properties
         $scope.cart = {
             items: [],
@@ -71,8 +73,8 @@ angular.module('todoApp')
             //Show alert message
             swal({
                 title: 'Added to cart',
-                text: 'I will close in 1 seconds.',
-                timer: 1000,
+                type: "success",
+                timer: 700,
                 showConfirmButton: false
             });
 
