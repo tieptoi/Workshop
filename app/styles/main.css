@@ -27,18 +27,17 @@ h6 {
     font-family: "Open Sans", Arial, sans-serif;
 }
 
+.navbar {
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
 .navbar-default {
     background: #fff;
 }
 
 .navbar-default a {
     font-weight: bold;
-}
-
-.navbar {
-    border: 0;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-    font
 }
 
 .navbar-default .navbar-nav>.active>a,
