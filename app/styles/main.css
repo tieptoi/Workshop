@@ -8,7 +8,7 @@ html {
 
 body {
     font-family: 'Oswald-Regular', Arial, sans-serif;
-    margin-top: 50px;
+    margin-top: 55px;
     margin-bottom: 150px;
     /*background-color: #FFFF;*/
     font-size: 14px;
@@ -27,13 +27,44 @@ h6 {
     font-family: "Open Sans", Arial, sans-serif;
 }
 
+.breadcrumbs {
+    overflow: hidden;
+    padding: 10px 0 6px;
+    border-bottom: solid 1px #d7d7d7;
+    background-color: #f9f9f9;
+}
+
+.color-red {
+    color: red;
+}
+
+.breadcrumbs h1 {
+    color: #666;
+    font-size: 22px;
+    margin-top: 8px;
+}
+
+.ion {
+    color: #48A548;
+}
+
 .navbar {
     border: 0;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    margin-bottom: 0px;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+    border-color: transparent;
 }
 
 .navbar-default {
     background: #fff;
+}
+
+.navbar-form {
+    width: 268px;
 }
 
 .navbar-default a {
@@ -112,8 +143,10 @@ h6 {
 /* Main marketing message and sign up button */
 
 .jumbotron {
+    width: 100%;
     background: #F8F8F8 url("/images/mac-glasses.jpg") center center no-repeat;
-    background-size: cover;
+    background-size: 100%;
+    /*background-size: cover;*/
     /*padding: 70px 0px 70px 0px;*/
     text-align: center;
     height: 450px;
@@ -687,13 +720,9 @@ button {
     padding: 0;
 }
 
-.navbar {
-    margin-bottom: 0px;
-}
-
 .itemList_Header {
     color: #fff;
-    padding: 5px 0px 6px 0px;
+    /*padding: 5px 0px 6px 0px;*/
     background-color: #48a548;
     /*margin-bottom: 10px;*/
     width: 100%;
@@ -742,15 +771,6 @@ button {
 .input-group button {
     border: 0;
     background: transparent;
-}
-
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-    border-color: transparent;
-}
-
-.navbar-form {
-    width: 268px;
 }
 
 .glyphicon-search {
@@ -982,7 +1002,8 @@ canvas {
 
 .panel-body>h2 {
     font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
+    /*font-weight: bold;*/
+    margin-bottom: 25px;
 }
 
 .header {

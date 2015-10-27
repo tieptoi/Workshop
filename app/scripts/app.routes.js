@@ -23,6 +23,14 @@ angular.module('app.routes', ['ngRoute'])
                 templateUrl: 'partials/auth/login',
                 controller: 'LoginController'
             })
+            .when('/contact', {
+                templateUrl: 'partials/shared/contact'
+                    // controller: 'LoginController'
+            })
+            .when('/about', {
+                templateUrl: 'partials/shared/about'
+                    // controller: 'LoginController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

@@ -1,13 +1,13 @@
 <!--<div ng-include="'partials/navbar'"></div>-->
 <div class="itemList no-mg-pd">
-    <section class="itemList_Header">
+    <section class="breadcrumbs">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-xs-12">
-                    <h3><strong>Products</strong></h3>
+                    <h1>Products</h1>
                 </div>
                 <div class="col-md-2 col-xs-6">
-                    <div class="form-group form-inline v-right">
+                    <div class="form-group form-inline">
                         <select class="form-control" ng-model="_pageSize" ng-change="perPageChange()">
                             <option value="">Item Per Page</option>
                             <option value="4">4</option>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-6">
-                    <div class="form-group form-inline v-right">
+                    <div class="form-group form-inline">
                         <select class="form-control" ng-model="sortOrder" ng-change="sortChange()">
                             <option value="">Sort by</option>
                             <option value="views-desc">Popular</option>
