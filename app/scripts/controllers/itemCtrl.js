@@ -129,6 +129,7 @@ angular.module('todoApp')
             url: '/api/upload',
             queueLimit: 5
         });
+        $scope.header = '';
         $scope.id = $routeParams.qvalue;
         $scope.item = {};
         $scope.item.name = '';
@@ -155,7 +156,7 @@ angular.module('todoApp')
             }
             var path = $location.path().split('/');
             //console.log(path.indexOf('edit'));
-            if (path && path.indexOf('edit') !== -1) {
+            if (path && path.indexOf('edit') > -1) {
                 $scope.header = "Edit Item";
             } else {
                 $scope.header = "Create Item";
@@ -208,22 +209,38 @@ angular.module('todoApp')
                 showLoaderOnConfirm: true
             }, function () {
                 setTimeout(function () {
-                    Item.updateItem($scope.item)
-                        .success(function (res) {
-                            swal({
-                                title: "Saved!",
-                                text: "Your item has been saved.",
-                                type: "success",
-                                timer: 1000,
-                                showConfirmButton: false
-                                    // }, function () {
-                                    //     console.log("test");
-                                    //$location.path('/');
-                                    //$scope.$apply();
-                            });
-                        }).error(function (err) {
-                            console.error(err);
+                    var submit;
+                    if ($scope.header && $scope.header === "Edit Item")
+                        submit = Item.updateItem($scope.item);
+                    else
+                        submit = Item.addItem($scope.item);
+                    //
+                    submit.success(function (res) {
+                        swal({
+                            title: "Saved!",
+                            text: "Your item has been saved.",
+                            type: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                                // }, function () {
+                                //     console.log("test");
+                                //$location.path('/');
+                                //$scope.$apply();
                         });
+                    }).error(function (err) {
+                        swal({
+                            title: "Failed!",
+                            text: "You dont have permission to update this item.",
+                            type: "error",
+                            timer: 1000,
+                            showConfirmButton: false
+                                // }, function () {
+                                //     console.log("test");
+                                //$location.path('/');
+                                //$scope.$apply();
+                        });
+                        console.error(err);
+                    });
                 }, 2000);
             });
 

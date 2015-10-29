@@ -3,7 +3,8 @@
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    passport = require('passport');
 
 /**
  * Main application file
@@ -31,11 +32,14 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 
 var app = express();
 
+// Passport config
+require('./lib/config/passport')(passport); // pass passport for configuration
+
 // Express settings
-require('./lib/config/express')(app);
+require('./lib/config/express')(app, passport);
 
 // Routing
-require('./lib/routes')(app);
+require('./lib/routes')(app, passport);
 
 // Start server
 app.listen(config.port, function () {
