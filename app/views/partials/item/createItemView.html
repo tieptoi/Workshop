@@ -35,8 +35,7 @@
                 <label class="control-label col-md-2 ">Description</label>
                 <div class="col-md-7 text-center">
                     <textarea name="description" class="form-control" ng-model="item.description" ng-minlength="10" ng-maxlength="200" required placeholder="Description"></textarea>
-                    <div class="help-block" ng-messages="itemForm.description
-.$error" ng-show="itemForm.description.$touched">
+                    <div class="help-block" ng-messages="itemForm.description.$error" ng-show="itemForm.description.$touched">
                         <div ng-messages-include="template/ngMessage.html"></div>
                     </div>
                 </div>
@@ -46,8 +45,7 @@
                 <label class="control-label col-md-2 ">Specification</label>
                 <div class="col-md-7 text-center">
                     <textarea name="specification" class="form-control" ng-model="item.specification" ng-minlength="10" ng-maxlength="200" required placeholder="Specification"></textarea>
-                    <div class="help-block" ng-messages="itemForm.specification
-.$error" ng-show="itemForm.specification.$touched">
+                    <div class="help-block" ng-messages="itemForm.specification.$error" ng-show="itemForm.specification.$touched">
                         <div ng-messages-include="template/ngMessage.html"></div>
                     </div>
                 </div>

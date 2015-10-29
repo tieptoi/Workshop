@@ -72,6 +72,9 @@ angular.module('todoApp')
                 .success(function (response) {
                     //console.error(response);
                     $scope.items = response;
+                    angular.forEach($scope.items, function (item) {
+                        item.orderQuantity = 1;
+                    });
                 }).error(function (response) {
                     console.log(response);
                 });
