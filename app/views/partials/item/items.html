@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-md-3" dir-paginate="item in items| filter:q | itemsPerPage: pageSize" current-page="currentPage" total-items="totalItems">
                         <div class="product-container">
-                            <div class="product-block" ng-click="viewDetail(item)" data-toggle="modal" data-target="#modal">
+                            <div class="product-block" ng-click="open(item)">
                                 <div class="image">
                                     <img src="images/{{item.image}}" title="{{item.name}}" alt="{{item.name}}">
                                 </div>
@@ -69,5 +69,5 @@
             </div>
         </div>
     </section>
-    <div ng-include="'partials/item/itemModalView'"></div>
+    <!-- <div ng-include="'partials/item/itemModalView'"></div> -->
 </div>

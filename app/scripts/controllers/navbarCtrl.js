@@ -1,5 +1,5 @@
 angular.module('todoApp')
-    .controller('NavbarController', function ($scope, $location) {
+    .controller('NavbarController', function ($scope, $rootScope, $location, $auth, $window, toastr) {
         'use strict';
         $scope.menus = [{
             title: 'Home',
@@ -7,13 +7,7 @@ angular.module('todoApp')
         }, {
             title: 'Item',
             link: '/item',
-            submenus: [
-            // {
- //     link: '/item/edit',
- //     title: 'Edit Item'
- // },
-
-             {
+            submenus: [{
                 link: '/item/create',
                 title: 'Create Item'
             }]
@@ -24,6 +18,18 @@ angular.module('todoApp')
             title: 'About Us',
             link: '/about'
         }];
+        $scope.user = $rootScope.currentUser;
+
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
+
+        $scope.logout = function () {
+            $auth.logout();
+            delete $window.localStorage.currentUser;
+            toastr.success('You have successfully logged out');
+            $location.path('/');
+        };
 
         $scope.isActive = function (route) {
             // var type = '|' + route.slice(route.lastIndexOf('/') + 1) + '|';

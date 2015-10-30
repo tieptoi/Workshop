@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('todoApp')
-    .controller('ItemController', function ($scope, $filter, Item) {
+    .controller('ItemController', function ($scope, $filter, $uibModal, Item) {
         /// Properties===============
         $scope.items = [];
         $scope.tab = 1;
@@ -9,6 +9,9 @@ angular.module('todoApp')
         $scope.currentPage = 1;
         $scope.pageSize = 8;
         $scope.totalItems = 0;
+        $scope.animationsEnabled = true;
+        $scope.modalSize = 'md';
+
         /// Init=====================
         Item.getItemsByPages($scope.currentPage, $scope.pageSize, 'name')
             .success(function (response) {
@@ -26,12 +29,32 @@ angular.module('todoApp')
             }).error(function (response) {
                 console.log(response);
             });
+        /// METHODS=====================
 
-
-
-        /* View Item Detail in Modal*/
-        $scope.viewDetail = function (item) {
-            $scope.$emit('viewItemDetail', item);
+        /*Open Modal*/
+        $scope.open = function (item) {
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'template/itemModalView.html',
+                controller: 'ModalItemController',
+                size: $scope.modalSize,
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                //Update Views for item
+                selectedItem.views = selectedItem.views + 1;
+                Item.updateItem(selectedItem).success(function (response) {
+                    console.log(response);
+                }).error(function (response) {
+                    console.log(response);
+                });
+            }, function () {
+                console.info('Modal dismissed at: ' + new Date());
+            });
         };
 
         /* Get Price(if item on sale)*/
@@ -62,7 +85,7 @@ angular.module('todoApp')
 
         /*  Add item to cart */
         $scope.add = function (item) {
-            item.orderQuantity = 1;
+            //item.orderQuantity = 1;
             $scope.$emit('add2Cart', item);
         };
 
@@ -90,47 +113,69 @@ angular.module('todoApp')
             $scope.currentPage = 1;
         };
     })
-    .controller('ModalItemController', function ($scope, Item, $location) {
-        /* Open Item Detail in Modal*/
-        $scope.$onRootScope('viewItemDetail', function (event, item) {
-            item.views = item.views + 1;
-            Item.updateItem(item).success(function (response) {
-                console.log(response);
-            }).error(function (response) {
-                console.log(response);
-            });
+    .controller('ModalItemController', function ($scope, $uibModalInstance, $location, Item, item) {
+        /*INIT*/
+        $scope.item = item;
 
-            $scope.item = item;
-        });
+        /// METHODS=====================
+        /*Close Modal with passing a result*/
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.item);
+        };
+
+        /*Close Modal with passing a result*/
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
         /* Check which tab is selcted in Item Detail Modal*/
         $scope.isSelected = function (tabName) {
             return tabName === $scope.tab;
         };
+
         /* Event hanppend when user select a tab in Item Detail Modal*/
         $scope.selectTab = function (tabName) {
             $scope.tab = tabName;
         };
+
         /*  Add item to cart */
         $scope.add = function (item, form) {
             if (form.$valid) {
-                $('#modal').modal('hide');
+                $uibModalInstance.close($scope.item);
                 $scope.$emit('add2Cart', item);
             }
         };
+
         /*  Edit item infor */
         $scope.edit = function (item) {
-            $('#modal').on('hidden.bs.modal', function () {
-                $location.path("/item/edit/id/" + item._id);
-                console.log("/item/edit/id/" + item._id);
-                $scope.$apply();
-            });
-            $('#modal').modal('hide');
+            $uibModalInstance.close($scope.item);
+            $location.path("/item/edit/id/" + item._id);
         };
     })
     .controller('CreateItemController', function ($scope, $location, Item, FileUploader, $routeParams) {
         var uploader = $scope.uploader = new FileUploader({
             url: '/api/upload',
-            queueLimit: 5
+            queueLimit: 5,
+            filters: [{
+                name: 'photoType',
+                // A user-defined filter
+                fn: function (item) {
+                    var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                    return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                }
+            }, {
+                name: 'isDuplicate',
+                // A user-defined filter
+                fn: function (item) {
+                    var flag = true;
+                    angular.forEach(uploader.queue, function (queue, key) {
+                        if (queue._file.name === item.name && queue._file.size === item.size) {
+                            flag = true;
+                        }
+                    });
+                    return flag;
+                }
+            }]
         });
         $scope.header = '';
         $scope.id = $routeParams.qvalue;
@@ -143,7 +188,9 @@ angular.module('todoApp')
             if ($scope.id && $scope.id != '') {
                 Item.getItemByID($scope.id)
                     .success(function (resp) {
+                        //assigne item to scope
                         $scope.item = resp;
+                        //get uploaded image file
                         Item.getImages(resp.image)
                             .success(function (data, status, headers, config) {
                                 var file = new File([data], resp.image, {
@@ -151,6 +198,7 @@ angular.module('todoApp')
                                 });
                                 //console.log(data.type);
                                 uploader.addToQueue(file);
+                                uploader.queue[0].upload();
                             });
                     })
                     .error(function (err) {
@@ -167,32 +215,11 @@ angular.module('todoApp')
 
 
         })();
-        //Adding Filter for upload control
-        uploader.filters.push({
-            name: 'photoType',
-            // A user-defined filter
-            fn: function (item) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-            }
-        });
 
-        uploader.filters.push({
-            name: 'isDuplicate',
-            // A user-defined filter
-            fn: function (item) {
-                for (var i = 0; i < uploader.queue.length; i++) {
-                    if (uploader.queue[i]._file.name === item.name && uploader.queue[i]._file.size === item.size) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        });
+        // uploader.onAfterAddingFile = function (item) {
+        //     //console.log(uploader.queue);
+        // };
 
-        uploader.onAfterAddingFile = function (item) {
-            //console.log(uploader.queue);
-        };
         uploader.onWhenAddingFileFailed = function (item, filter, options) {
             console.log(item);
             console.log(filter);

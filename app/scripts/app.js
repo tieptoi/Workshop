@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('todoApp', ['angularUtils.directives.dirPagination', 'ngRoute', 'ngMessages', 'angularFileUpload', 'app.routes', 'ngCookies'])
+angular.module('todoApp', ['angularUtils.directives.dirPagination', 'ngRoute', 'satellizer', 'toastr', 'ngAnimate', 'ui.bootstrap', 'ngMessages', 'angularFileUpload', 'app.routes', 'ngCookies'])
     .config(['$provide', function ($provide) {
         $provide.decorator('$rootScope', ['$delegate', function ($delegate) {
             Object.defineProperty($delegate.constructor.prototype, '$onRootScope', {
