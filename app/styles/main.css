@@ -8,7 +8,7 @@ html {
 
 body {
     font-family: 'Oswald-Regular', Arial, sans-serif;
-    margin-top: 54px;
+    margin-top: 53px;
     margin-bottom: 150px;
     /*background-color: #FFFF;*/
     font-size: 14px;
@@ -67,16 +67,26 @@ h6 {
     width: 268px;
 }
 
-.navbar-default a {
+.navbar-default li a {
     font-weight: bold;
+    line-height: 21px;
+}
+
+.navbar-nav li a .btn {
+    display: inline;
+    /*padding: 0;*/
+}
+
+.navbar-default .navbar-nav a {
+    border-bottom: 3px solid transparent;
+    background-color: #FFF;
+    border-radius: 0px;
 }
 
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:focus,
 .navbar-default .navbar-nav>.active>a:hover {
-    border-radius: 0px;
     border-bottom: 3px solid #48A548;
-    background-color: #FFF;
     color: #48A548;
 }
 
