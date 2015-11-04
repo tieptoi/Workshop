@@ -18,8 +18,11 @@ angular.module('todoApp')
             title: 'About Us',
             link: '/about'
         }];
-        $scope.user = $rootScope.currentUser;
+        //$scope.user = $rootScope.currentUser;
 
+        $rootScope.$watch('currentUser', function (newValue, oldValue) {
+            $scope.user = newValue;
+        });
         $scope.isAuthenticated = function () {
             return $auth.isAuthenticated();
         };
@@ -27,6 +30,7 @@ angular.module('todoApp')
         $scope.logout = function () {
             $auth.logout();
             delete $window.localStorage.currentUser;
+            $scope.$emit('rmCart');
             toastr.success('You have successfully logged out');
             $location.path('/');
         };
@@ -44,11 +48,19 @@ angular.module('todoApp')
     }).controller('CartController', function ($scope, $cookies) {
         'use strict';
         //Define Properties
-        $scope.cart = {
-            items: [],
-            total: 0
+        var init = function () {
+            $scope.cart = {
+                items: [],
+                total: 0
+            };
         };
 
+        init();
+        /* Add item to cart by listening on add2Cart event */
+        $scope.$onRootScope('rmCart', function () {
+            init();
+            $cookies.remove("cart");
+        });
         /* Add item to cart by listening on add2Cart event */
         $scope.$onRootScope('add2Cart', function (event, item) {
             //Check duplicate item in cart
