@@ -46,21 +46,39 @@ angular.module('todoApp')
             return ((menu.submenus) && (menu.submenus.length > 0));
         };
     }).controller('CartController', function ($scope, $cookies) {
-        'use strict';
-        //Define Properties
-        var init = function () {
-            $scope.cart = {
-                items: [],
-                total: 0
-            };
-        };
+        /*Define Properties*/
+        $scope.cart = {};
 
-        init();
+        /*WATCH*/
+        //Watch Cart if there are any changes
+        $scope.$watch('cart', function (newValue, oldValue) {
+            $cookies.putObject('cart', newValue);
+            $scope.changeQuantity();
+        }, true);
+
         /* Add item to cart by listening on add2Cart event */
         $scope.$onRootScope('rmCart', function () {
-            init();
             $cookies.remove("cart");
+            $scope.cart = $scope.getCart();
         });
+
+        /* METHODS*/
+        $scope.getCart = function () {
+            // Retrieving a cookie
+            if ($cookies.getObject('cart') && $cookies.getObject('cart') !== null) {
+                return $cookies.getObject('cart');
+                //$scope.changeQuantity();
+            } else {
+                return {
+                    items: [],
+                    total: 0
+                };
+
+            }
+        };
+
+        $scope.cart = $scope.getCart();
+
         /* Add item to cart by listening on add2Cart event */
         $scope.$onRootScope('add2Cart', function (event, item) {
             //Check duplicate item in cart
@@ -87,7 +105,7 @@ angular.module('todoApp')
                 // Setting a cookie
                 //$cookies.putObject('cart', $scope.cart);
             }
-            $scope.changeQuantity();
+            //$scope.changeQuantity();
             //Show alert message
             swal({
                 title: 'Added to cart',
@@ -100,12 +118,8 @@ angular.module('todoApp')
 
         /* Remove item in cart */
         $scope.remove = function (item) {
-            if (item.orderQuantity > 0) {
-                $scope.cart.total = $scope.cart.total - (item.orderQuantity * item.price);
-            }
             $scope.cart.items.splice($scope.cart.items.indexOf(item), 1);
-            // Setting a cookie
-            //$cookies.putObject('cart', $scope.cart);
+            //$scope.changeQuantity();
 
         };
 
@@ -118,14 +132,5 @@ angular.module('todoApp')
                 }
             });
         };
-        //Watch Cart if there are any changes
-        $scope.$watch('cart', function (newValue, oldValue) {
-            $cookies.putObject('cart', newValue);
-        }, true);
 
-        // Retrieving a cookie
-        if ($cookies.getObject('cart') && $cookies.getObject('cart') !== null) {
-            $scope.cart = $cookies.getObject('cart');
-            $scope.changeQuantity();
-        }
     });

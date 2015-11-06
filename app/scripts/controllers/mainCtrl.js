@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('todoApp')
-    .controller('MainController', function ($scope, $auth, Thing) {
+    .controller('MainController', function ($scope, $auth) {
         $scope.isAuthenticated = function () {
             return $auth.isAuthenticated();
         };
@@ -14,7 +14,7 @@ angular.module('todoApp')
         /*Thing.getThings().success(function (awesomeThings) {
             $scope.awesomeThings = awesomeThings;
         })*/
-        ;
+        //;
         // Get One Thing
         //Service.addThing(thing).success(function (response) {
         //  console.log(response);

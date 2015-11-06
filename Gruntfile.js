@@ -43,8 +43,7 @@ module.exports = function (grunt) {
         },
         open: {
             server: {
-                path: 'http://localhost:<%= express.options.port %>',
-                app: 'Chrome'
+                path: 'http://localhost:<%= express.options.port %>'
             }
         },
         watch: {
@@ -74,7 +73,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= yeoman.app %>/views/{,/**/}*.{html,jade}',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*//*}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js',
+                    '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js'
                     // '<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
                 ],
 
@@ -219,9 +218,7 @@ module.exports = function (grunt) {
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
         useminPrepare: {
-            html: ['<%= yeoman.app %>/views/index.html',
-                '<%= yeoman.app %>/views/index.jade'
-            ],
+            html: ['<%= yeoman.app %>/views/index.html', '<%= yeoman.app %>/views/index.jade'],
             options: {
                 dest: '<%= yeoman.dist %>/public'
             }
@@ -229,9 +226,7 @@ module.exports = function (grunt) {
 
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
-            html: ['<%= yeoman.dist %>/views/{,/**/}*.html',
-                '<%= yeoman.dist %>/views/{,/**/}*.jade'
-            ],
+            html: ['<%= yeoman.dist %>/views/{,/**/}*.html', '<%= yeoman.dist %>/views/{,/**/}*.jade'],
             css: ['<%= yeoman.dist %>/public/styles/{,*/}*.css'],
             options: {
                 assetsDirs: ['<%= yeoman.dist %>/public']

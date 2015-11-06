@@ -76,13 +76,19 @@ angular.module('todoApp')
         // };
 
 
-        //Sort List of Items according to user's selection.
+        /* Sort List of Items according to user's selection.*/
         $scope.sortChange = function () {
             if ($scope.sortOrder !== '') {
-                $scope.items = $filter('orderBy')($scope.items, $scope.sortOrder.split('-')[0], $scope.sortOrder.split('-')[1] === 'desc' ? true : false);
+                $scope.items = $scope.sort($scope.items);
             }
         };
-
+        /*Sort fnct*/
+        $scope.sort = function (items) {
+            if ($scope.sortOrder !== '') {
+                return $filter('orderBy')(items, $scope.sortOrder.split('-')[0], $scope.sortOrder.split('-')[1] === 'desc' ? true : false);
+            }
+            return items;
+        };
         /*  Add item to cart */
         $scope.add = function (item) {
             //item.orderQuantity = 1;
@@ -94,7 +100,7 @@ angular.module('todoApp')
             Item.getItemsByPages(newPageNumber, $scope.pageSize, 'name')
                 .success(function (response) {
                     //console.error(response);
-                    $scope.items = response;
+                    $scope.items = $scope.sort(response);
                     angular.forEach($scope.items, function (item) {
                         item.orderQuantity = 1;
                     });
@@ -149,10 +155,17 @@ angular.module('todoApp')
         /*  Edit item infor */
         $scope.edit = function (item) {
             $uibModalInstance.close($scope.item);
-            $location.path("/item/edit/id/" + item._id);
+            $location.path('/item/edit/id/' + item._id);
         };
     })
     .controller('CreateItemController', function ($scope, $location, Item, FileUploader, $routeParams) {
+        /*Init*/
+        $scope.header = '';
+        $scope.id = $routeParams.qvalue;
+        //$scope.item = {};
+        //$scope.item.name = '';
+        //$scope.item.category = '';
+        //$scope.item.issale = true;
         var uploader = $scope.uploader = new FileUploader({
             url: '/api/upload',
             queueLimit: 5,
@@ -177,15 +190,10 @@ angular.module('todoApp')
                 }
             }]
         });
-        $scope.header = '';
-        $scope.id = $routeParams.qvalue;
-        $scope.item = {};
-        $scope.item.name = '';
-        $scope.item.category = '';
-        $scope.item.issale = true;
 
+        /*Method*/
         (function () {
-            if ($scope.id && $scope.id != '') {
+            if ($scope.id && $scope.id !== '') {
                 Item.getItemByID($scope.id)
                     .success(function (resp) {
                         //assigne item to scope
@@ -208,12 +216,10 @@ angular.module('todoApp')
             var path = $location.path().split('/');
             //console.log(path.indexOf('edit'));
             if (path && path.indexOf('edit') > -1) {
-                $scope.header = "Edit Item";
+                $scope.header = 'Edit Item';
             } else {
-                $scope.header = "Create Item";
+                $scope.header = 'Create Item';
             }
-
-
         })();
 
         // uploader.onAfterAddingFile = function (item) {
@@ -228,51 +234,49 @@ angular.module('todoApp')
         $scope.submitForm = function (isValid) {
             //console.log($scope.item);
             //Show alert message
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this item!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#A5DC86",
-                confirmButtonText: "Yes, save it!",
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true
-            }, function () {
-                setTimeout(function () {
-                    var submit;
-                    if ($scope.header && $scope.header === "Edit Item")
-                        submit = Item.updateItem($scope.item);
-                    else
-                        submit = Item.addItem($scope.item);
-                    //
-                    submit.success(function (res) {
-                        swal({
-                            title: "Saved!",
-                            text: "Your item has been saved.",
-                            type: "success",
-                            timer: 1000,
-                            showConfirmButton: false
-                                // }, function () {
-                                //     console.log("test");
-                                //$location.path('/');
-                                //$scope.$apply();
+            if (isValid)
+                swal({
+                    title: 'Are you sure?',
+                    text: 'You will not be able to recover this item!',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#A5DC86',
+                    confirmButtonText: 'Yes, save it!',
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    setTimeout(function () {
+                        var submit;
+                        if ($scope.header && $scope.header === 'Edit Item') {
+                            submit = Item.updateItem($scope.item);
+                        } else {
+                            submit = Item.addItem($scope.item);
+                        }
+                        //
+                        submit.success(function (res) {
+                            swal({
+                                title: 'Saved!',
+                                text: 'Your item has been updated successfully.',
+                                type: 'success',
+                                timer: 1000,
+                                showConfirmButton: false
+                                    // }, function () {
+                                    //     console.log('test');
+                                    //$location.path('/');
+                                    //$scope.$apply();
+                            });
+                        }).error(function (err) {
+                            swal({
+                                title: 'Failed!',
+                                text: 'You dont have permission to update this item.',
+                                type: 'error',
+                                timer: 1000,
+                                showConfirmButton: false
+                            });
+                            console.error(err);
                         });
-                    }).error(function (err) {
-                        swal({
-                            title: "Failed!",
-                            text: "You dont have permission to update this item.",
-                            type: "error",
-                            timer: 1000,
-                            showConfirmButton: false
-                                // }, function () {
-                                //     console.log("test");
-                                //$location.path('/');
-                                //$scope.$apply();
-                        });
-                        console.error(err);
-                    });
-                }, 2000);
-            });
+                    }, 2000);
+                });
 
         };
     });
