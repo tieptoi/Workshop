@@ -15,7 +15,10 @@ angular.module('todoApp').controller('LoginController', function ($scope, $auth,
     };
     $scope.authenticate = function (provider) {
         $auth.authenticate(provider)
-            .then(function () {
+            .then(function (res) {
+                $auth.setToken(res.data.token);
+                $window.localStorage.currentUser = JSON.stringify(res.data.user);
+                $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
                 toastr.success('You have successfully signed in with ' + provider);
                 $location.path('/');
             })
