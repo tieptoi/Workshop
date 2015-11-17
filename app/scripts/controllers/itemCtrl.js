@@ -158,7 +158,7 @@ angular.module('todoApp')
             $location.path('/item/edit/id/' + item._id);
         };
     })
-    .controller('CreateItemController', function ($scope, $location, Item, FileUploader, $routeParams) {
+    .controller('CreateItemController', function ($scope, $location, Item, FileUploader, $routeParams, $auth) {
         /*Init*/
         $scope.header = '';
         $scope.id = $routeParams.qvalue;
@@ -234,7 +234,7 @@ angular.module('todoApp')
         $scope.submitForm = function (isValid) {
             //console.log($scope.item);
             //Show alert message
-            if (isValid)
+            if (isValid && $auth.isAuthenticated())
                 swal({
                     title: 'Are you sure?',
                     text: 'You will not be able to recover this item!',

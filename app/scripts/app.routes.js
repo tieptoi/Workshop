@@ -17,15 +17,24 @@ angular.module('app.routes', ['ngRoute'])
             })
             .when('/item/edit/:qkey/:qvalue', {
                 templateUrl: 'partials/item/createItem',
-                controller: 'CreateItemController'
+                controller: 'CreateItemController',
+                resolve: {
+                    loginRequired: loginRequired
+                }
             })
             .when('/login', {
                 templateUrl: 'partials/auth/login',
-                controller: 'LoginController'
+                controller: 'LoginController',
+                resolve: {
+                    skipIfLoggedIn: skipIfLoggedIn
+                }
             })
             .when('/signup', {
                 templateUrl: 'partials/auth/signup',
-                controller: 'SignUpController'
+                controller: 'SignUpController',
+                resolve: {
+                    skipIfLoggedIn: skipIfLoggedIn
+                }
             })
             .when('/contact', {
                 templateUrl: 'partials/shared/contact'
@@ -40,8 +49,6 @@ angular.module('app.routes', ['ngRoute'])
             });
 
         /*Satellizer Config*/
-        $authProvider.httpInterceptor = false;
-        $authProvider.withCredentials = false;
         $authProvider.loginUrl = '/login';
         $authProvider.signupUrl = '/signup';
         $authProvider.unlinkUrl = '/logout/';
@@ -50,10 +57,11 @@ angular.module('app.routes', ['ngRoute'])
             clientId: '478091019019627'
         });
         /*Satellizer Methods*/
-        function skipIfLoggedIn($q, $auth) {
+        function skipIfLoggedIn($q, $location, $auth) {
             var deferred = $q.defer();
             if ($auth.isAuthenticated()) {
-                deferred.reject();
+                //deferred.reject();
+                $location.path('/');
             } else {
                 deferred.resolve();
             }
