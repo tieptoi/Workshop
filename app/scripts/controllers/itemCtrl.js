@@ -212,6 +212,8 @@ angular.module('todoApp')
                     .error(function (err) {
                         console.error(err);
                     });
+            } else {
+                $scope.item = {};
             }
             var path = $location.path().split('/');
             //console.log(path.indexOf('edit'));
@@ -222,9 +224,13 @@ angular.module('todoApp')
             }
         })();
 
-        // uploader.onAfterAddingFile = function (item) {
-        //     //console.log(uploader.queue);
-        // };
+        uploader.onAfterAddingFile = function (item) {
+            //console.log(item);
+            console.log(uploader.queue[0].file.name);
+            console.log($scope.item);
+            $scope.item.image = item.file.name;
+        };
+
 
         uploader.onWhenAddingFileFailed = function (item, filter, options) {
             console.log(item);
@@ -265,6 +271,7 @@ angular.module('todoApp')
                                     //$location.path('/');
                                     //$scope.$apply();
                             });
+                            console.log(res);
                         }).error(function (err) {
                             swal({
                                 title: 'Failed!',
