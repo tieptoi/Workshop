@@ -1,51 +1,7 @@
 angular.module('todoApp')
-    .controller('NavbarController', function ($scope, $rootScope, $location, $auth, $window, toastr) {
-        'use strict';
-        $scope.menus = [{
-            title: 'Home',
-            link: '/'
-        }, {
-            title: 'Item',
-            link: '/item',
-            submenus: [{
-                link: '/item/create',
-                title: 'Create Item'
-            }]
-        }, {
-            title: 'Contact Us',
-            link: '/contact'
-        }, {
-            title: 'About Us',
-            link: '/about'
-        }];
-        //$scope.user = $rootScope.currentUser;
-
-        $rootScope.$watch('currentUser', function (newValue, oldValue) {
-            $scope.user = newValue;
-        });
-        $scope.isAuthenticated = function () {
-            return $auth.isAuthenticated();
-        };
-
-        $scope.logout = function () {
-            $auth.logout();
-            delete $window.localStorage.currentUser;
-            $scope.$emit('rmCart');
-            toastr.success('You have successfully logged out');
-            $location.path('/');
-        };
-
-        $scope.isActive = function (route) {
-            // var type = '|' + route.slice(route.lastIndexOf('/') + 1) + '|';
-            // console.log(route + ': ' + type);
-            return route === $location.path() || (route.length > 1 && $location.path().indexOf(route) > -1);
-        };
-
-        $scope.hasSubMenu = function (menu) {
-            //return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-            return ((menu.submenus) && (menu.submenus.length > 0));
-        };
-    }).controller('CartController', function ($scope, $cookies) {
+    .controller('NavbarController',['$scope', '$rootScope', '$location', '$auth', '$window', 'toastr', NavbarController])
+    .controller('CartController',['$scope', '$cookies',CartController]);
+    function CartController($scope, $cookies) {
         /*Define Properties*/
         $scope.cart = {};
 
@@ -133,4 +89,51 @@ angular.module('todoApp')
             });
         };
 
-    });
+    };
+    function NavbarController($scope, $rootScope, $location, $auth, $window, toastr) {
+        'use strict';
+        $scope.menus = [{
+            title: 'Home',
+            link: '/'
+        }, {
+            title: 'Item',
+            link: '/item',
+            submenus: [{
+                link: '/item/create',
+                title: 'Create Item'
+            }]
+        }, {
+            title: 'Contact Us',
+            link: '/contact'
+        }, {
+            title: 'About Us',
+            link: '/about'
+        }];
+        //$scope.user = $rootScope.currentUser;
+
+        $rootScope.$watch('currentUser', function (newValue, oldValue) {
+            $scope.user = newValue;
+        });
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
+
+        $scope.logout = function () {
+            $auth.logout();
+            delete $window.localStorage.currentUser;
+            $scope.$emit('rmCart');
+            toastr.success('You have successfully logged out');
+            $location.path('/');
+        };
+
+        $scope.isActive = function (route) {
+            // var type = '|' + route.slice(route.lastIndexOf('/') + 1) + '|';
+            // console.log(route + ': ' + type);
+            return route === $location.path() || (route.length > 1 && $location.path().indexOf(route) > -1);
+        };
+
+        $scope.hasSubMenu = function (menu) {
+            //return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            return ((menu.submenus) && (menu.submenus.length > 0));
+        };
+    };

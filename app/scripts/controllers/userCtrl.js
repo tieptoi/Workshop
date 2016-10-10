@@ -1,6 +1,10 @@
 'use strict';
 
-angular.module('todoApp').controller('LoginController', function ($scope, $auth, $window, $rootScope, $location, toastr) {
+angular.module('todoApp')
+    .controller('LoginController', ['$scope', '$auth', '$window', '$rootScope', '$location', 'toastr', LoginController])
+    .controller('SignUpController', ['$scope', '$auth', '$window', '$rootScope', '$location', 'toastr', SignUpController]);
+
+function LoginController($scope, $auth, $window, $rootScope, $location, toastr) {
     $scope.login = function () {
         $auth.login($scope.user)
             .then(function (res) {
@@ -27,8 +31,9 @@ angular.module('todoApp').controller('LoginController', function ($scope, $auth,
                 toastr.error(response.data.message);
             });
     };
+};
 
-}).controller('SignUpController', function ($scope, $auth, $window, $rootScope, $location, toastr) {
+function SignUpController($scope, $auth, $window, $rootScope, $location, toastr) {
     $scope.signup = function () {
         console.log($scope.user);
         $auth.signup($scope.user)
@@ -44,4 +49,4 @@ angular.module('todoApp').controller('LoginController', function ($scope, $auth,
             });
     };
 
-});
+};
